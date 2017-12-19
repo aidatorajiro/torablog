@@ -1,6 +1,10 @@
 {{ partial "header" . }}
 {{ partial "nav" . }}
 <div class="container">
+  {{ if not .IsHome }}
+  <h1>{{ .Title }}</h1>
+  <hr></hr>
+  {{ end }}
   <section class="section">
       {{ $paginator := .Paginate .Data.Pages }}
       {{ range sort $paginator.Pages }}
