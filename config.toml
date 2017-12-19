@@ -3,7 +3,7 @@ languageCode = "ja-jp"
 title = "Tora Blog"
 copyright = "All posts are licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)."
 canonifyurls = true
-theme = "kiera"
+theme = "hugo-kiera"
 
 paginate = 3
 
