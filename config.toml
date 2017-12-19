@@ -20,9 +20,13 @@ copyright = "All posts are licensed under [CC0](https://creativecommons.org/publ
   keywords = []
   avatar = "avatar.png"
   displayauthor = false
+
   # pygments
-  PygmentsUseClasses = true
   PygmentsCodeFences = true
+  pygmentsCodeFencesGuessSyntax = true
+  pygmentsStyle = "monokai"
+  pygmentsUseClasses = true
+
   # pagination
   paginate = 10
   paginatePath = "page"
