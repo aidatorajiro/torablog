@@ -25,6 +25,6 @@ pygmentsCodeFences = true
     weight = 1
 
 [[menu.main]]
-    url = "/other/"
+    url = "/others/"
     name = "Other"
     weight = 2
