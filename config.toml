@@ -1,0 +1,30 @@
+baseurl = "http://localhost:1313/"
+languageCode = "ja-jp"
+title = "Tora Blog"
+copyright = "All posts are licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)."
+canonifyurls = true
+theme = "kiera"
+
+paginate = 3
+
+summaryLength = 30
+enableEmoji = true
+pygmentsCodeFences = true
+
+[author]
+    name = "Aida Torajiro"
+    github = "aidatorajiro"
+    twitter = "kawarusosu"
+
+[params]
+    tagline = "技術とかいろいろ"
+
+[[menu.main]]
+    url = "/"
+    name = "Home"
+    weight = 1
+
+[[menu.main]]
+    url = "/other/"
+    name = "Other"
+    weight = 1
