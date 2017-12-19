@@ -1,4 +1,4 @@
-baseurl = "http://localhost:1313/"
+baseurl = "https://torablog.netlify.com/"
 languageCode = "ja-jp"
 title = "Tora Blog"
 copyright = "All posts are licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)."
