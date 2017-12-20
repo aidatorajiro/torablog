@@ -12,11 +12,10 @@ theme = "hugo-theme-casper"
   cover = "avatar.png"
   author = "Torajiro Aida"
   githubName = "aidatorajiro"
+  facebookName = "kawarusosu"
   twitterName = "kawarusosu"
   hideHUGOSupport = false
   # hjsStyle = "default"
-
-  customCSS = [ "syntax.css" ]
   
   [params.social]
     twitter = "kawarusosu"

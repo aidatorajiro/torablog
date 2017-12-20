@@ -80,4 +80,4 @@ main = return ()
 
 ## 解説
 
-最初の、```{-# LANGUAGE RankNTypes #-}```
+最初の、```{-# LANGUAGE RankNTypes #-}```で、
