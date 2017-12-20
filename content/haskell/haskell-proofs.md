@@ -78,6 +78,42 @@ main :: IO ()
 main = return ()
 {{< /highlight >}}
 
-## 解説
+### 解説
 
-最初の、```{-# LANGUAGE RankNTypes #-}```で、
+{{< highlight haskell >}}
+-- [定義]
+-- Not
+newtype Not p = Not (forall q. p -> q)
+{{< /highlight >}}
+Haskellの世界には否定は存在しないので、ここで定義している。
+
+```forall q. p -> q```というのは「pからなんでも出てくるような関数」の型なので、pが存在してしまうと、そのような関数は存在できなくなる。つまり、```forall q. p -> q```という関数が存在するということは、pでないということだと直感的には理解できる。
+
+実際、この定義で後々の否定に関する定理も証明できるし、論理学的にも、$(\forall p. p \Rightarrow q) \Leftrightarrow (\lnot p)$である。
+
+Haskellには否定の概念はないが、多相型(forall)があるので、否定を表現することができる。Haskellにはこんな調子で、何か有名な概念そのものは言語に実装されていないが、代わりにその概念を定義できるような機能が実装されている、というパターンが多い。モナドだって型クラスの機能を使ってHaskellで定義されているし、リストのデータ構造の定義もHaskellで書かれている。
+
+{{< highlight haskell >}}
+-- [公理]
+-- 排中律
+classic :: Either p (Not p)
+classic = undefined
+{{< /highlight >}}
+
+これを公理と言っていいのかわからないが、公理である。
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
