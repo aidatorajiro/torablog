@@ -17,15 +17,13 @@ copyright = "All posts are licensed under [CC0](https://creativecommons.org/publ
 [params]
   description = "技術とかいろいろ"
   author = "Torajiro Aida"
-  keywords = []
+  keywords = ["blog", "javascript", "haskell", "blockchain", "wine"]
   avatar = "avatar.png"
   displayauthor = false
 
   # pygments
+  PygmentsUseClasses = true
   PygmentsCodeFences = true
-  pygmentsCodeFencesGuessSyntax = true
-  pygmentsStyle = "monokai"
-  pygmentsUseClasses = true
 
   # pagination
   paginate = 10
