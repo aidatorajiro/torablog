@@ -1,30 +1,22 @@
-baseurl = "https://torablog.netlify.com/"
-
-languageCode = "ja-jp"
-
-title = "Tora Blog"
-
-theme = "hugo-now"
-
-googleAnalytics = ""
-
-copyright = "All posts are licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)."
-
-[taxonomies]
-  category = "categories"
-  tag = "tags"
+BaseUrl = "https://torablog.netlify.com/"
+LanguageCode = "ja-jp"
+Title = "Tora Blog"
+paginate = 10
+# DisqusShortname = "YOUR_SHORT_NAME_HERE"
+Copyright = "All posts are licensed under CC0."
+canonifyurls = true
+theme = "hugo-theme-casper"
 
 [params]
   description = "技術とかいろいろ"
+  cover = "avatar.png"
   author = "Torajiro Aida"
-  keywords = ["blog", "javascript", "haskell", "blockchain", "wine"]
-  avatar = "avatar.png"
-  displayauthor = false
+  githubName = "aidatorajiro"
+  twitterName = "kawarusosu"
+  hideHUGOSupport = false
+  # hjsStyle = "default"
 
-  # pygments
-  PygmentsUseClasses = true
-  PygmentsCodeFences = true
-
-  # pagination
-  paginate = 10
-  paginatePath = "page"
+  customCSS = [ "syntax.css" ]
+  
+  [params.social]
+    twitter = "kawarusosu"

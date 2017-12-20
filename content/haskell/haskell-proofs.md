@@ -5,10 +5,9 @@ tags: ["haskell", "定理証明"]
 categories: ["haskell"]
 ---
 
-Haskellで定理証明もどき。
+Haskellで定理証明もどき、やってみた
 
-
-```haskell
+{{< highlight haskell >}}
 {-# LANGUAGE RankNTypes #-}
 
 -- [定義]
@@ -77,4 +76,8 @@ prop1 h h0 = h0 $ const $ h id
 
 main :: IO ()
 main = return ()
-```
+{{< /highlight >}}
+
+## 解説
+
+最初の、```{-# LANGUAGE RankNTypes #-}```
