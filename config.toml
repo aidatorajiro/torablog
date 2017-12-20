@@ -19,3 +19,15 @@ theme = "hugo-theme-casper"
   
   [params.social]
     twitter = "kawarusosu"
+
+[[menu.main]]
+  name = "Haskell"
+  weight = 3
+  identifier = "haskell"
+  url = "/haskell"
+
+[[menu.main]]
+  name = "Others"
+  weight = 1
+  identifier = "others"
+  url = "/others"
