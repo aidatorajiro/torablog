@@ -15,7 +15,7 @@ theme = "hugo-theme-casper"
   facebookName = "kawarusosu"
   twitterName = "kawarusosu"
   hideHUGOSupport = false
-  # hjsStyle = "default"
+  googleAnalyticsUserID = "UA-111453747-1"
   
   [params.social]
     twitter = "kawarusosu"
