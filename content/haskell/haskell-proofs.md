@@ -2,7 +2,6 @@
 title: "Haskellで定理証明"
 date: 2017-12-20T01:52:01+09:00
 tags: ["haskell", "定理証明"]
-categories: ["haskell"]
 ---
 
 Haskellで定理証明もどき、やってみた
