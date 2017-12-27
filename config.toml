@@ -2,10 +2,11 @@ BaseUrl = "https://torablog.netlify.com/"
 LanguageCode = "ja-jp"
 Title = "Tora Blog"
 paginate = 10
-# DisqusShortname = "YOUR_SHORT_NAME_HERE"
+DisqusShortname = "tora-blog"
 Copyright = "All posts are licensed under CC0."
 canonifyurls = true
 theme = "hugo-theme-casper"
+sectionPagesMenu = "main"
 
 [params]
   description = "技術とかいろいろ"
@@ -19,15 +20,3 @@ theme = "hugo-theme-casper"
   
   [params.social]
     twitter = "kawarusosu"
-
-[[menu.main]]
-  name = "Haskell"
-  weight = 3
-  identifier = "haskell"
-  url = "/haskell"
-
-[[menu.main]]
-  name = "Others"
-  weight = 1
-  identifier = "others"
-  url = "/others"

@@ -1,3 +1,4 @@
 ---
-additional_description: "最近話題になっている技術。
+title: "Block Chain"
+description: "最近話題になっている技術。"
 ---
