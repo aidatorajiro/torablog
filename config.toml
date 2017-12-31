@@ -1,4 +1,4 @@
-BaseUrl = "https://torablog.netlify.com/"
+BaseUrl = "//torablog.netlify.com/"
 LanguageCode = "ja-jp"
 Title = "Tora Blog"
 paginate = 10
