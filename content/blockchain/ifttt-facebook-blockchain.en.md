@@ -3,7 +3,6 @@ title: "[en] An IFTTT applet to upload my Facebook posts to a blockchain network
 description: "This article will show how to create an IFTTT applet that uploads Facebook posts to Ethereum"
 tags: ["IFTTT", "Ethereum"]
 date: 2018-01-01T22:50:00+09:00
-LanguageCode: "en"
 ---
 
 This article will show how to create an IFTTT applet that uploads Facebook posts to [Rinkeby](https://www.rinkeby.io/), one of the testnets of Ethereum.

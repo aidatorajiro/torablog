@@ -1,5 +1,4 @@
 BaseUrl = "//torablog.netlify.com/"
-LanguageCode = "ja-jp"
 Title = "Tora Blog"
 paginate = 10
 DisqusShortname = "tora-blog"
