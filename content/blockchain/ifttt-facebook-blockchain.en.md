@@ -9,7 +9,7 @@ This article will show how to create an IFTTT applet that uploads Facebook posts
 
 ### 1. Get Ether
 
-Firstly, we have to get Ether to run code on Ethereum. Since Rinkeby is a test net, You don't have to pay. Install some Ethereum wallet, such as [MetaMask](https://metamask.io/), and create an account on Rinkeby. Then, just go to [the authenticated faucet of Rinkeby](https://faucet.rinkeby.io/) and follow its procedure to get Ether for free. In this article, MetaMask is used as the client.
+Firstly, we have to get Ether to run code on Ethereum. Since Rinkeby is a test net, you don't have to pay. Install some Ethereum wallet, such as [MetaMask](https://metamask.io/), and create an account on Rinkeby. Then, just go to [the authenticated faucet of Rinkeby](https://faucet.rinkeby.io/) and follow its procedure to get Ether for free. In this article, MetaMask is used as the client.
 
 #### MetaMask Installation
 
