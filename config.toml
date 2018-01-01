@@ -1,4 +1,4 @@
-BaseUrl = "//torablog.netlify.com/"
+BaseUrl = "https://torablog.netlify.com/"
 Title = "Tora Blog"
 paginate = 10
 DisqusShortname = "tora-blog"
