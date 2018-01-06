@@ -10,9 +10,7 @@ draft: true
 
 
 ## 内容
-とある事情で、libcとかいう魔境にある、カーネルのAPIをElectronから叩く必要があったんです。
-
-調べてみると、CのライブラリをNode側で呼べる、node-ffiというものがあるらしい。それを使うことにした。
+CのライブラリをNode側で呼べる、node-ffiというライブラリをElectronから叩いた時に詰まったことなどをメモ。
 
 ### NODE_MODULE_VERSIONで詰まる
 
