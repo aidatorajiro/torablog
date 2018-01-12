@@ -1,12 +1,14 @@
 ---
 title: "色々メモその１"
+date: 2018-01-13T01:52:01+09:00
+description: "Haskell、圏論、自然変換、モノイド、とか。トピックス：「Haskellのforallは三通りの解釈ができる。」「任意のモノイドは適当な集合AについてEnd(A)の部分モノイドと同型であることの証明」"
 draft: true
 ---
 
 <http://nineties.github.io/category-seminar/>  
 これを読んだらちょっとだけ圏論がわかった気がする。
 
-### Haskellのforallは三通りの解釈ができる！！！
+### Haskellのforallは三通りの解釈ができる。
 
 (1)プログラム的解釈・・・ポリモルフィズム
    
@@ -64,3 +66,19 @@ G(f∘g) = (f∘g)(e)
 したがって、任意のモノイドは適当な集合AについてEnd(A)の部分モノイドと同型である。∎
 
 $$
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
