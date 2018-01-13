@@ -183,19 +183,3 @@ peirce :: ((p -> q) -> p) -> p
 peirce h = either id (\(Not px) -> h px) classic
 {{< /highlight >}}
 パースの法則。排中律がないと証明できないのにNotを使っていない、という謎な法則である。たしか排中律と同値なのでこれをごにょごにょ変形していくと`Either p (forall q. p -> q)`となるのだろう。誰かやって。
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-});
-</script>
