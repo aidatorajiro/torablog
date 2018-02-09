@@ -7,7 +7,7 @@ Copyright = "All posts are licensed under CC0."
 canonifyurls = true
 theme = "hugo-theme-casper"
 sectionPagesMenu = "main"
-hasCJKLanguage = True
+hasCJKLanguage = true
 
 [params]
   description = "技術とかいろいろ"
