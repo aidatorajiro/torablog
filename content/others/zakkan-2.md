@@ -1,6 +1,7 @@
 ---
-title: "雑感その２"
+title: "ポエムその２"
 draft: true
+tag: "謎", "SCP"
 ---
 
 (SCP)[https://ja.wikipedia.org/wiki/SCP_Foundation]は大体3つから4つにカテゴライズすることができると思う。
