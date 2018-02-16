@@ -6,8 +6,11 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": "{{ .Site.Params.authorname }}{{ with .Site.Params.logo }}",
-        "logo": "{{ printf "%s%s" $.Site.BaseURL . }}"{{end}}
+        "name": "{{ .Site.Params.authorname }}"{{ with .Site.Params.logo }},
+        "logo": {
+            "@type": "ImageObject",
+            "url": "{{ printf "%s%s" $.Site.BaseURL . }}"
+        }{{end}}
     },
     "author": {
         "@type": "Person",
@@ -15,9 +18,7 @@
         {{ with .Site.Params.logo }}
         "image": {
             "@type": "ImageObject",
-            "url": "{{ printf "%s%s" $.Site.BaseURL . }}",
-            "width": 250,
-            "height": 250
+            "url": "{{ printf "%s%s" $.Site.BaseURL . }}"
         }, 
         {{end}}
         "url": "{{ .Site.Params.authorwebsite }}",
@@ -41,12 +42,10 @@
     "url": "{{ .Permalink }}",
     "datePublished": "{{ .Date.Format "2006-01-02T15:04Z" }}",
     "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04Z" }}",
-    {{ with .Params.image }}
+    {{ with .Params.image | default .Site.Params.logo }}
     "image": {
         "@type": "ImageObject",
-        "url": "{{ printf "%s%s" $.Site.BaseURL . }}",
-        "width": 3000,
-        "height": 1445
+        "url": "{{ printf "%s%s" $.Site.BaseURL . }}"
     },
     {{end}}
     {{ if (.Params.tags) }}"keywords": "{{ delimit .Params.tags ", " }}",{{end}}
@@ -68,9 +67,7 @@
         {{ with .Site.Params.logo }}
         "image": {
             "@type": "ImageObject",
-            "url": "{{ printf "%s%s" $.Site.BaseURL . }}",
-            "width": 250,
-            "height": 250
+            "url": "{{ printf "%s%s" $.Site.BaseURL . }}"
         },
         {{end}}
         "url": "{{ .Site.Params.authorwebsite }}",
