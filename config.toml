@@ -13,11 +13,17 @@ hasCJKLanguage = true
   description = "技術とかいろいろ"
   cover = "avatar.png"
   author = "Torajiro Aida"
+  authorname = "Torajiro Aida"
+  authorlocation = "Japan"
+  authorwebsite = "https://torablog.netlify.com/"
+  authorbio = "Japanese high school student"
   githubName = "aidatorajiro"
   facebookName = "kawarusosu"
   twitterName = "kawarusosu"
   hideHUGOSupport = false
   googleAnalyticsUserID = "UA-111453747-1"
+  
+  logo = "avatar.png"
   
   [params.social]
     twitter = "kawarusosu"
