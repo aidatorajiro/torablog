@@ -22,6 +22,7 @@ hasCJKLanguage = true
   twitterName = "kawarusosu"
   hideHUGOSupport = false
   googleAnalyticsUserID = "UA-111453747-1"
+  customCSS = ["css/custom.css"]
   
   logo = "avatar.png"
   
