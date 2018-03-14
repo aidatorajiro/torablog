@@ -38,7 +38,7 @@ tags: ["数学"]
 
 ![](/img/lorentz-transformation-matome/5.png)
 
-そこで一つ疑問が浮かぶ。$\hat{i^\prime}$と$\hat{j^\prime}$の大きさはどうすれば良いのだろうか？ひとまず、$\hat{i}$から垂線を伸ばし、ぶつかったところを$\hat{i^\prime}$の終点とする。すなわち、$\hat{i}$が$\hat{i^\prime}$の時間軸に対する正射影になるようにする。同様に$\hat{j^\prime}$も決める。そうした上で、$\hat{i^\prime}$と$\hat{j^\prime}$がなす平行四辺形の面積Sを求める。
+そこで一つ疑問が浮かぶ。$\hat{i^\prime}$と$\hat{j^\prime}$の大きさはどうすれば良いのだろうか？ひとまず、$\hat{i}$から垂線を伸ばし、ぶつかったところを$\hat{i^\prime}$の終点とする。すなわち、$\hat{i}$が$\hat{i^\prime}$の距離軸に対する正射影になるようにする。同様に$\hat{j^\prime}$も決める。そうした上で、$\hat{i^\prime}$と$\hat{j^\prime}$がなす平行四辺形の面積Sを求める。
 
 <div>
 $$
