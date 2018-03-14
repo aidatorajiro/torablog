@@ -76,8 +76,7 @@ $$
 </div>
 
 と定める。こうすると、$ S = 1 $になる。
-
-さて、次は$\vec{p}=x\hat{i}+t\hat{j}=x^\prime\hat{i^\prime}+t^\prime\hat{j^\prime}$より、$(x, t)$から$(x^\prime, t^\prime)$への変換を求める。
+最後に、$\vec{p}=x\hat{i}+t\hat{j}=x^\prime\hat{i^\prime}+t^\prime\hat{j^\prime}$より、$(x, t)$から$(x^\prime, t^\prime)$への変換を求める。
 
 <div>
 $$
