@@ -1,7 +1,7 @@
 ---
 title: solcをブラウザで使うときに詰まった点
 tags: ["Ethereum", "solc", "javascript"]
-date: 2018-02-16T15:25:25+09:00
+date: 2018-03-26T15:25:25+09:00
 ---
 
 SolidityのコンパイラはC++で書かれている。JSでは、Emscriptenを用いてsoljson.jsという名前のJavascript(asm.js)に変換した上で使っている。そのwrapperこそが、おなじみのsolcだ。ちなみに、今までのsoljson.jsは<https://github.com/ethereum/solc-bin>にある。
