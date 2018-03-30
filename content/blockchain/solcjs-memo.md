@@ -11,13 +11,13 @@ SolidityのコンパイラはC++で書かれている。JSでは、Emscriptenを
 ということで愚直に`import solc from 'solc'`していてはコンパイルが終わらないので、soljson.jsをブラウザからscriptタグでそのまま読み込みつつ、ラッピングして自分でsolcオブジェクトを作るという謎の芸当をしなくてはいけない。ということで以下のコード。
 
 solc.js
-{{ <highlight javascript> }}
+{{< highlight javascript >}}
 import solc from 'solc/wrapper'
 export default solc(require('module'))
-{{ </javascript> }}
+{{< /highlight >}}
 
 webpack.config.js
-{{ <highlight javascript> }}
+{{< highlight javascript >}}
 module.exports = {
   .
   .
@@ -29,6 +29,6 @@ module.exports = {
   .
   .
 }
-{{ </javascript> }}
+{{< /highlight >}}
 
 まず一行目で、solcの「ラッパー部分」を読み込んでいる。そして二行目で、読み込んだラッパーにscriptタグからsoljson.jsから生成されたModule変数を渡している。他のライブラリでrequire('module')としている箇所があるので、require('module')から一括してwindow.Moduleを取得するようにしている。で、これと似たようなことが[remixのソースコード](<https://github.com/ethereum/remix/blob/287aa1153f0bc5b5d0faf2d01d12ef5a8f6e10ca/remix-solidity/src/compiler/compiler.js#L238>)にも書かれている。うーん黒魔術。
