@@ -11,3 +11,7 @@ tags: ["数学"]
 $\mathbb{Z^2}$の可変長配列は、$(n, \\{0..n-1\\} \rightarrow \mathbb{Z^2})$とも書けるか。
 
 ちなみに、$\mathbb{Z^2}$の無限長配列$\mathbb{N} \rightarrow \mathbb{Z^2}$の全体の濃度は、$ |\mathbb{N} \rightarrow \mathbb{Z^2}| = |(\mathbb{Z^2})^{|\mathbb{N}|}| = \aleph\_1 $
+
+2018/04/06訂正  
+ごめんなさい。$ |2^{\mathbb{N}}| = \aleph\_1 $はまずいですね...  
+本稿の$\aleph\_1$を$|\mathbb{R}|$に読み直してください。
