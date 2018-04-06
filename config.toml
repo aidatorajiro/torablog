@@ -2,7 +2,6 @@ BaseUrl = "https://torablog.netlify.com/"
 LanguageCode = "ja"
 Title = "Tora Blog"
 paginate = 10
-DisqusShortname = "tora-blog"
 Copyright = "All posts are licensed under CC0."
 canonifyurls = true
 theme = "hugo-theme-casper"
