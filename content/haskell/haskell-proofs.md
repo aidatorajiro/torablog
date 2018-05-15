@@ -2,7 +2,7 @@
 title: "Haskell Proofs"
 date: 2017-12-20T01:52:01+09:00
 description: "実はHaskellで定理証明のようなことができる。"
-tags: ["haskell", "定理証明"]
+tags: ["haskell", "theorem proving"]
 ---
 
 {{< highlight haskell >}}

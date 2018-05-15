@@ -1,7 +1,7 @@
 ---
 title: Nodeの闇其の壱
 date: 2018-03-10T16:57:24+09:00
-tags: ["bittorrent", "webtorrent", "javascript"]
+tags: ["javascript"]
 ---
 
 Node.jsでは、os.platform()を呼ぶと、実行しているOSの種類がわかる。
