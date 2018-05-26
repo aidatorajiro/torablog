@@ -1,12 +1,14 @@
 BaseUrl = "https://torablog.netlify.com/"
 LanguageCode = "ja"
+defaultContentLanguage = "ja"
 Title = "Tora Blog"
 paginate = 10
 Copyright = "All posts are licensed under CC0."
 canonifyurls = true
-theme = "hugo-theme-casper"
 sectionPagesMenu = "main"
 hasCJKLanguage = true
+pygmentsCodeFences = true
+theme = "hugo-theme-casper"
 
 [params]
   description = "技術とかいろいろ"
@@ -14,16 +16,18 @@ hasCJKLanguage = true
   author = "Torajiro Aida"
   authorname = "Torajiro Aida"
   authorlocation = "Japan"
-  authorwebsite = "https://torablog.netlify.com/"
+  authorwebsite = "https://github.com/aidatorajiro/"
   authorbio = "Japanese high school student"
   githubName = "aidatorajiro"
   facebookName = "kawarusosu"
   twitterName = "kawarusosu"
+  github = "https://github.com/aidatorajiro"
+  facebook = "https://www.facebook.com/kawarusosu"
+  twitter = "https://twitter.com/kawarusosu"
   hideHUGOSupport = false
   googleAnalyticsUserID = "UA-111453747-1"
   customCSS = ["css/custom.css"]
-  
-  logo = "avatar.png"
+  paginatedsections = "blockchain haskell javascript others wine"
   
   [params.social]
     twitter = "kawarusosu"
