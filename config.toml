@@ -28,6 +28,7 @@ theme = "hugo-theme-casper"
   googleAnalyticsUserID = "UA-111453747-1"
   customCSS = ["css/custom.css"]
   paginatedsections = "blockchain haskell javascript others wine"
+  customHeaderPartial = "katex.html"
   
   [params.social]
     twitter = "kawarusosu"
