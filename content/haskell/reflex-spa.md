@@ -54,9 +54,10 @@ ReflexとReflex-DOMの仕組みは、以下のページでとてもわかりや�
 
 <https://github.com/hansroland/reflex-dom-inbits/blob/master/tutorial.md>
 
-Reflexでは、4つの重要人物が登場する。`Widget`、`Dynamic`、`Event`、`Behavior`だ。
+Reflexでは、4つの重要な概念が登場する。`Widget`、`Dynamic`、`Event`、`Behavior`だ。
 
-- `Widget` - HTML要素の事。
+- `Widget` - HTML要素の事。`Dynamic`の値に応じて内容を動的に変化させることができる。
+  例えば、`el 'span' (dynText x)`は、内容が`x`のspan要素のこと。`x = 'test'`の時、`<span>text</span>`になる。`x`の値が変化するごとに、span要素の内容も連動して変化する。
 - `Dynamic` - 変数の事。
 - `Event` - 
 - `Behavior` - 
