@@ -50,6 +50,10 @@ FRPのもっとわかりやすい例として、Excelが挙げられる。Excel
 
 ## ReflexとReflex-DOMの仕組み
 
+ReflexとReflex-DOMの仕組みは、以下のページでとてもわかりやすく説明されている。
+
+<https://github.com/hansroland/reflex-dom-inbits/blob/master/tutorial.md>
+
 Reflexでは、4つの重要人物が登場する。`Widget`、`Dynamic`、`Event`、`Behavior`だ。
 
 - `Widget` - HTML要素の事。
