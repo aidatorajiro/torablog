@@ -3,7 +3,7 @@ title: ReflexでSPA作ってみる
 date: 2018-06-13T16:47:00+09:00
 ---
 
-Haskell製のWebアプリケーションフレームワークの一つに、Reflexというものがある。今回はそれを使ってSPA(Single Page Application)のルーティングを実装してみる。
+Haskell製のWebアプリケーションフレームワークの一つに、Reflexというものがある。今回はそれを使ってSPA(Single Page Application)を実装してみる。
 
 今回は、一つのHTMLファイルにサーバへの全通信を繋げて、Javascriptが接続先パスをもとにサイトのルーティングをし、ページのレンダリングをする仕組みを実装する。
 
@@ -52,7 +52,7 @@ FRPのもっとわかりやすい例として、Excelが挙げられる。Excel
 このサイトに詳しい手順が書かれている。  
 <https://github.com/reflex-frp/reflex-platform>
 
-ソースコード`your-source-file.hs`を用意した上で、以下のコマンドを順に実行する。(Linux と MacOS のみ対応)
+Reflexのソースコード`your-source-file.hs`を用意した上で、以下のコマンドを順に実行する。(Linux と MacOS のみ対応)
 
 1. `git clone https://github.com/reflex-frp/reflex-platform`
 2. `cd reflex-platform`
@@ -86,33 +86,30 @@ console.log("server started on port " + port);
 
 ## ReflexとReflex-DOMの仕組み
 
-ReflexとReflex-DOMの仕組みは、<https://github.com/hansroland/reflex-dom-inbits/blob/master/tutorial.md>でとても詳しく説明されている。
-
 *注意: Reflexバージョン0.5、Reflex-DOMバージョン0.4に関する内容。*
 
 まずはHaskell / Reflexの型・関数の書き方を説明する。
 
 - 型の名前は必ず大文字から始まらないといけない。
 
-- 型を小文字から書き始めた場合、どんな型でも入ると言う意味になる。ただし、同じ文字には同じ型が入る。例：恒等写像`id :: a -> a`
+- 型を小文字から書き始めた場合、どんな型でも入ると言う意味になる。ただし、同じ文字には同じ型が入る。例：恒等写像`id :: a -> a`{.haskell}
 
-- 関数は`関数名 :: 型`で表す。関数の型は`引数1の型 -> ... -> 引数nの型 -> 返り値の型`で表す。例えば、整数が引数で整数が出力の関数fは、`f :: Int -> Int`{.haskell} で表す。
+- 関数は、1行目に`関数名 :: 引数1の型 -> ... -> 引数nの型 -> 返り値の型`、2行目に`関数名 引数1 ... 引数n = プログラム`で定義する。引数を二乗する関数の例:
+  ```haskell
+  func :: Int -> Int
+  func n = n * n
+  ```
+  「funcは`Int -> Int`{.haskell}型である」「`Int -> Int`{.haskell}型の関数funcが存在する」という意味で、`func :: Int -> Int`{.haskell}と書く場合がある。
 
-- `Event Int`のような形の型は、内部に`Int`型の値を保持している型になる。`Event`だけでは型になり得ず、内部にどんな型が存在しているかも指定しなければいけない。Javaのジェネリクスみたいなやつ。
+- `Event Int`{.haskell}のような、大文字から始まる語が二語以上続く型では、内部にどんな型の値があるか指定することができる。Javaのジェネリクスみたいなやつ。
 
 - 関数への入力は、`関数名 引数1 ... 引数n`で表す。
 
 - 関数名が記号の場合、入力を`引数1 * 引数2`のように書くことができる。この時、`* :: 引数1の型 -> 引数2の型 -> 出力の型`となる。
 
-- Reflexにおいて、文字列は`Text`型をもつ。というか、`Text`型じゃないと受け付けてくれない。
+- Reflexにおいて、文字列は`Text`{.haskell}型をもつ。本当は`String`{.haskell}型が標準なのだが、`Text`{.haskell}型じゃないと受け付けてくれない。
 
 - 無名関数は、`(\引数1 ... 引数n -> プログラム)`で表す。
-
-- 関数は、1行目に`関数名 :: 型`、2行目に`関数名 引数1 ... 引数n = プログラム`で定義する。引数を5倍する関数の例:
-  ```haskell
-  func :: Int -> Int
-  func n = n * 5
-  ```
 
 - 何もデータがない型(nullのようなもの)は、空タプル`()`で表す。
 
@@ -158,7 +155,7 @@ Dynamicは、EventとBehaviorの組み合わせ。つまり、変化する値と
 - `updated :: Dynamic t a -> Event t a`{.haskell}  - DynamicからEventを取り出す。
 - `holdDyn :: a -> Event t a -> Widget t (Dynamic t a)`{.haskell}  - Eventに初期値を与えることで、Dynamicを作る。ただし、後述のWidgetに包まれて帰ってくる。
 - `count :: Event t a -> Widget t (Dynamic t Int)`{.haskell}  - Eventが発生した回数を数え、`Int`が格納されたDynamicを作成する。ただし、後述のWidgetに包まれて帰ってくる。
-- `<$> :: (a -> b) -> Dynamic a -> Dynamic b`{.haskell}  - 超便利関数。任意の関数を、入力Dynamic出力Dynamicの関数に変化させることができる。じつはDynamicの親分にFunctorというものがあって、そこに入っている関数。
+- `<$> :: (a -> b) -> (Dynamic a -> Dynamic b)`{.haskell}  - 超便利関数。任意の関数を、入力Dynamic出力Dynamicの関数に変化させることができる。じつはDynamicの親分にFunctorというものがあって、そこに入っている関数。
 
 BehaviorからDynamicを作ることは、Behaviorの振る舞いがわからないので不可能。
 
@@ -167,51 +164,84 @@ BehaviorからDynamicを作ることは、Behaviorの振る舞いがわからな
 
 ### Widget
 
-ページを構成する要素の事。Dynamicの値に応じて内容を動的に変化させることができる。また、Dynamicを生成する一部の関数も、これを作成できる関数は、
+ページを構成する要素の事。Dynamicの値に応じて内容を動的に変化させることができる。これを作成できる関数は、
 
-- `el :: Text -> Widget t a -> Widget t a`{.haskell}  - HTMLタグ作成
+- `el :: Text -> Widget t a -> Widget t a`{.haskell}  - HTMLタグ作成。Widgetを消費してWidgetを生成しているのは、タグの中の内容を指定させるため。
 - `text :: Text -> Widget t ()`{.haskell}  - 固定テキスト作成
 - `dynText :: Dynamic Text -> Widget t ()`{.haskell}  - 可変テキスト作成
 - `button :: Text -> Widget t (Event t ())`{.haskell}  - ボタン作成。クリックイベントが付いてくる。
 
-などがある。elがWidgetを消費してWidgetを生成しているのは、タグの中の内容を指定させるため。
+などがある。また、DynamicやBehaviorを生成する一部の関数は、`Widget t (Dynamic t a)`{.haskell}の形で値を返す。
 
-例えば、`x :: Dynamic Text`{.haskell} に対し、`el 'span' (dynText x)`{.haskell} は、内容がxのspan要素のこと。xの値が`'test'`の時、生成されるHTMLは`<span>test</span>`になる。xの値が変化するごとに、span要素の内容も連動して変化する。
+例えば、`x :: Dynamic Text`{.haskell} に対し、`el "span" (dynText x)`{.haskell} は、内容がxのspan要素のこと。xの値が`"test"`{.haskell}の時、生成されるHTMLは`<span>test</span>`{.html}になる。xの値が変化するごとに、span要素の内容も連動して変化する。
 
-do記法(Widgetの親分にMonadというものがあって、それについてくる機能)を用いると、複数のWidgetをつなげたり、`<-`を使ってWidget内部の値を"取り出す"ことができる。これは、先ほどの`hold`や`holdDyn`や`button`などからできる、Widgetに包まれた値を処理するのにとても役に立つ。do記法の最後の行は必ずWidgetでなければならない。
+do記法(Widgetの親分にMonadというものがあって、それについてくる機能)を用いると、複数のWidgetをつなげたり、`<-`を使ってWidget内部の値を"取り出す"ことができる。これは、先ほどのholdやholdDynやbuttonなどから作られる、Widgetに包まれた値を処理するのにとても役に立つ。do記法の最後の行は必ずWidgetでなければならない。そして、do記法で作られたWidgetの型はその最後の行の型と一致する。return関数を使うと、任意の値をWidgetに包むことができる。
 
 #### span要素が三つ並んでいるWidgetの例
 
 ```haskell
-do
+widget1 :: Widget t ()
+widget1 = do
   el "span" (text "テキスト1")
   el "span" (text "テキスト2")
   el "span" (text "テキスト3")
+  return ()
 ```
+
+見ての通り、do記法を使うと3つのelを1つに合成することができる。最後、`return ()`としているのは、widget1の型を`Widget t ()`{.haskell}にするため。
 
 #### ボタンを押した回数を表示するWidgetの例
 
 ```haskell
-do
-  ev <- button 'click me'
+widget2 :: Widget t ()
+widget2 = do
+  ev <- button "click me"
   dynText (count ev)
+  return ()
 ```
 
-まず、button関数でクリックイベントを取得し、count関数でイベントの発生回数を取得し、dynTextでテキストとして表示する。
+`button "click me"`{.haskell} の型は`Widget t (Event t ())`{.haskell} だけど、`<-`という記号を用いると、Widgetの中の値を"取り出す"ことができる。つまり、evの型は`Event t ()`{.haskell}になる。その後これを、count関数に通してDynamic化し、dynTextに通してWidget化している。
 
-`button 'click me'`{.haskell} の型は`Widget t (Event t ())`{.haskell} だけど、`<-`という記号を用いると、Widgetの中の値を"取り出す"ことができる。つまり、`ev`の型は`Event t ()`になる。その後これを、count関数に通してDynamic化し、dynTextに通してWidget化している。
+
+
+## Reflexソースコードの書き方
+
+先ほどの、「ボタンを押した回数を表示するWidget」を、実際にソースコードにすると、こうなる。
+
+```haskell
+{-# LANGUAGE OverloadedStrings #-}
+
+import Reflex.Dom
+
+widget2 :: Widget t ()
+widget2 = do
+  ev <- button "click me"
+  dynText (count ev)
+  return ()
+
+main :: IO ()
+main = mainWidget widget2
+```
+
+1行目でOverloadedStrings言語拡張を導入して、自動的に文字列がText型に変換されるようにしている。
+
+3行目でReflexをインポートしている。
+
+Haskellプログラムのエントリーポイントはmain関数だ。mainWidgetを使うと、`Widget t ()`{.haskell}をmain関数の型`IO ()`{.haskell}に変換してくれる。
 
 ## ルーティングの実装
 
 今回は、一つのHTMLファイルにサーバへの全通信を繋げて、HTML内のJavascriptが接続先パスをもとにサイトのルーティングをする仕組みを作る。この際、複数のページが存在し、それぞれのページから他のページへのリンクを張ることができる。
 
-つまり、パスが変わると、パスの変わり方も変わる。それがリンクの構造だ。だからこそ、ページAからページBに、ページBからページAにリンクが貼ってある時、無限にAとBの間を往復できる。プログラム的に言うと、再帰構造になっている。
+パスが変わると、パスの変わり方も変わる。それがリンクの構造だ。だからこそ、ページAからページBに、ページBからページAにリンクが貼ってある時、無限にAとBの間を往復できる。
 
-Reflexには、このような再帰構造を上手く扱える関数が用意されている。
+Reflexには、そのような再帰的構造を上手く扱える関数が用意されている。
 
-`mfix :: (a -> Widget t a) -> Widget t a`
+```haskell
+mfix :: (a -> Widget t a) -> Widget t a
+```
 
-以下3つの仮定から、`(Text -> Widget t Text) -> Widget t Text`の関数をまずは構築する。
+以下3つの仮定から、
 
 - パスを格納するDynamicを`loc :: Dynamic t Text`{.haskell} として扱う。
 
@@ -221,15 +251,21 @@ Reflexには、このような再帰構造を上手く扱える関数が用意�
 
 まずは、先ほど紹介した超便利関数`<$>`を使って、動的に変化するWidgetを作る。
 
-`getPage <$> loc :: Dynamic t (Widget t (Event t Text))`{.haskell} 
+```haskell
+getPage <$> loc :: Dynamic t (Widget t (Event t Text))
+```
 
 なかなか複雑な型になってきた。この型は、「動的に変化する、Text型のEventを格納したWidget」と言う意味になる。しかしこのままではDynamicに包まれたWidgetができるだけで、Widgetを作れない。最終的に作るべきものはWidgetだから、何とかして中身のWidgetを外に持ってくる必要がある。そこでReflex-DOMの`dyn`関数を使う。
 
-`dyn :: Dynamic t (Widget t a) -> Widget t (Event t a)`{.haskell} 
+```haskell
+dyn :: Dynamic t (Widget t a) -> Widget t (Event t a)
+```
 
 これに、先ほどの`getPage <$> loc`を適用すると...
 
-`dyn (getPage <$> loc) :: Widget t (Event t (Event t Text))`{.haskell} 
+```haskell
+dyn (getPage <$> loc) :: Widget t (Event t (Event t Text))
+```
 
 が出てくる。これで、Widgetを一番外に持ってくることができたが、ここでまた問題が発生する。Eventが二重になっている。今度はこれを一重にしなければならない。
 
@@ -241,11 +277,12 @@ Reflexには、このような再帰構造を上手く扱える関数が用意�
 
 `hold`はEventに初期値を与えることでBehaviorを作る関数、`never`は絶対に発火しないイベント、`switch`は現在Behaviorに入っているEventが発火した時に発火するEventを作る関数だ。
 
-- `hold :: a -> Event t a -> Widget t (Behavior t a)`{.haskell} 
+- `hold :: a -> Event t a -> Widget t (Behavior t a)`{.haskell}
 
-- `never :: Event t a`{.haskell} (絶対に発火しないので、値を必要をしない。だから中の値の型は何でもよくなる)
+- `never :: Event t a`{.haskell}
+  (絶対に発火しないので、値を必要をしない。だから中の値の型は何でもよくなる)
 
-- `switch :: Behavior t (Event t a) -> Event t a`{.haskell} 
+- `switch :: Behavior t (Event t a) -> Event t a`{.haskell}
 
 このようにして、最終的に以下のような形で`loc`から対応するページを描画した上で、`Dynamic t Text`を求める関数が完成した。
 
@@ -265,6 +302,7 @@ func loc = do
 Haskellやその周辺のフレームワークは数学的（？）思考を強いてくるから非常にめんどくさい　でもそこがいい！
 
 ## 参考文献
+https://github.com/hansroland/reflex-dom-inbits/blob/master/tutorial.md  
 https://github.com/reflex-frp/reflex  
 https://github.com/reflex-frp/reflex-dom  
 https://github.com/reflex-frp/reflex/blob/develop/Quickref.md  
