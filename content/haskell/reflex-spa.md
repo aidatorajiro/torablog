@@ -204,7 +204,7 @@ do
 
 つまり、パスが変わると、パスの変わり方も変わる。それがリンクの構造だ。だからこそ、ページAからページBに、ページBからページAにリンクが貼ってある時、無限にAとBの間を往復できる。プログラム的に言うと、再帰構造になっている。
 
-以上のことに留意した上で実際にプログラムを作ってみよう。
+では、ルーティングという概念の数学的（？）構造を理解したところで、実際にそれをReflexのコードに落とし込んでみる。
 
 以下、パスを格納するDynamicを`loc :: Dynamic t Text`{.haskell} として扱う。
 
@@ -212,7 +212,7 @@ do
 
 さらに、パスを入れたら対応するページが出てくる関数`getPage :: Text -> Widget t (Event t Text)`{.haskell} があるものとする。
 
-まずは、Haskellに標準で備わっている超便利関数`<$>`を使って、動的に変化するWidgetを作る。この関数は、`<$> :: (a -> b) -> (m a -> m b)`{.haskell} という型で、
+まずは、先ほど紹介した超便利関数`<$>`を使って、動的に変化するWidgetを作る。
 
 `getPage <$> loc :: Dynamic t (Widget t (Event t Text))`{.haskell} 
 
@@ -228,7 +228,7 @@ do
 
 外側のEventと内側のEventとの違いについて考えてみる。外側のEventは、dyn関数がDynamicをWidgetに変換する時についてきたものだ。しかし、今欲しいものは、次にどのページに遷移するかのEventである。だから、外側のEventは無視して、内側のEventを採用する必要がある。
 
-この時、`dyn`関数が内側と外側を入れ替えるような心配はしなくて良い。なぜなら、`dyn`関数は **全ての型aに対し** `Dynamic t (Widget t a)`を`Widget t (Event t a)`に変換しているからだ。すなわち、`dyn`関数はaがどのような性質を持っているか全く知らない。付加されるEventは入力のDynamicやWidgetに関係しているかもしれないが、決してaには関係できない。だから、外側のEventは内側のEventと関係がない。このように、型から関数の振る舞いを予測できるのも、Haskellの醍醐味である。
+この時、`dyn`関数が内側と外側を入れ替えるような心配はしなくて良い。なぜなら、`dyn`関数は **全ての型aに対し** `Dynamic t (Widget t a)`を`Widget t (Event t a)`に変換しているからだ。すなわち、`dyn`関数はaがどのような性質を持っているか全く知らない。付加されるEventは入力のDynamicやWidgetに関係しているかもしれないが、決してaには関係できない。だから、外側のEventは内側のEventと関係がない。このように、型から関数の振る舞いを予測できるのも、Haskellの醍醐味。
 
 内側のEventだけを採用する方法はいくつかあるが、`hold`、`never`、`switch`を組み合わせた方法を用いる。
 
@@ -240,7 +240,7 @@ do
 
 - `switch :: Behavior t (Event t a) -> Event t a`{.haskell} 
 
-これは正しいdo記法の式ではない(最後の行がWidgetじゃない)が、こんな風に書けばEventを抽出できる。
+これは正しいdo記法の式ではない(最後の行がWidgetじゃないし、locの定義が明らかにされていない)が、こんな風に書けばEventを抽出できる。
 
 ```haskell
 do
@@ -260,33 +260,7 @@ site = do
   holdDyn "" (switch behaviorOfEvent)
 ```
 
-そう、`holdDyn`という、EventからDynamicを作る関数を用いて、無理やり再帰させてしまったのだ！
-
-`holdDyn :: a -> Event t a -> Widget t (Dynamic t a)`{.haskell} 
-
-
-
-mdo記法つかう
-
-では、ルーティングという概念の数学的（？）構造を理解したところで、実際にそれをReflexのコードに落とし込んでみる。まずは最初に、結論となるコードを記す。
-
-```haskell
-import Reflex.Dom
-import Reflex.Dom.Location ( getLocationPath )
-
-main :: IO ()
-main = do
-  init_loc <- getLocationPath
-  mainWidget $ mdo
-    ee <- dyn $ (\l -> pushState l >> router l) <$> loc
-    be <- hold never ee
-    loc <- holdDyn init_loc (switch be)
-    return ()
-```
-
-ここで`router l`関数は、パスlに対応するWidgetを生成する。`pushState l`関数は、HTML5 History APIのpushState関数を呼び、ブラウザの履歴にパスlを追加する。
-
-coincidenceで詰んだ -> hold & switchを使おう
+`holdDyn`を用いて、EventからDynamicを作っている。さらに、先ほどまで定義が明らかにされていなかったlocに対して自分自身を指定している(再帰)。実はこれでもう、ルーティングは完成だ。
 
 ## 感想
 Haskellやその周辺のフレームワークは数学的（？）思考を強いてくるから非常にめんどくさい　でもそこがいい！
