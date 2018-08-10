@@ -3,19 +3,20 @@ title: ReflexでSPA作ってみる
 date: 2018-06-13T16:47:00+09:00
 ---
 
-Haskell製のWebアプリケーションフレームワークの一つに、Reflexというものがある。今回はそれを使ってSPA(Single Page Application)を実装してみる。
+Haskellという言語で使えるWebアプリケーションフレームワークの一つに、Reflexというものがある。それを使ってSPA(Single Page Application)を実装してみる。SPAとは、サイトを一つのHTMLファイルで構成し、データベースへのアクセスやページの描画をすべてブラウザ側でやってしまうと言うもの。
 
-今回は、一つのHTMLファイルにサーバへの全通信を繋げて、Javascriptが接続先パスをもとにサイトのルーティングをし、ページのレンダリングをする仕組みを実装する。
+今回は、一つのHTMLファイルにサーバへの全通信を繋げて、JavascriptがURLをもとにサイトのルーティングをし、ページのレンダリングをする仕組みを実装する。こうすることで、ブラウザがサーバ内のどのURLにアクセスしても同じHTMLファイルがダウンロードされるが、描画されるページはURLによって変わるようになる。また、一度サーバにアクセスした後は、サイト内のページの切り替わりは全てブラウザ側でするようになる。
 
 ## GHCJSとReflex
 
-HaskellコンパイラのひとつであるGHCは、以下のような流れでプログラムを機械語に変換している。[^1]
+HaskellコンパイラのひとつであるGHCは、以下の流れでプログラムを機械語に変換している。[^1]
 
-![](/img/reflex-spa/HscPipe2.png)
+![](../../static/img/reflex-spa/pipeline.png)
+<small>http://www.scs.stanford.edu/11au-cs240h/notes/ghc.html から引用。(c) David Mazières</small>
 
 これを見ると、処理の最後の方ではSTG形式 -> Cmm形式 -> 機械語の順で変換していることがわかるが、このSTGという中間言語になったところで、それをJavascriptに翻訳するコンパイラがGHCJSだ。[^2]
 
-さらに、HaskellのFRPフレームワークとしてReflexというものがあり、それをGHCJSに対応させてDOM、すなわちHTMLの動的な操作ができるようになったのがReflex-DOMだ。今回はこのReflexとReflex-DOMを用いて、SPAを構築する。
+さらに、HaskellのFRP(後述)フレームワークとしてReflexというものがあり、それをGHCJSに対応させてDOM、すなわちHTMLの動的な操作ができるようになったのがReflex-DOMだ。今回はこのReflexとReflex-DOMを用いて、SPAを構築する。
 
 フロントエンドのフレームワークにはよくあること（？）かもしれないけど、かなりソフトウェア同士の関係が複雑になっている...
 
@@ -23,9 +24,10 @@ HaskellコンパイラのひとつであるGHCは、以下のような流れで�
 
 ReflexはFRP(Functional Reactive Programming)フレームワークである。
 
-簡単に言うと、FRPとは、ある一つの値が変わると、それに関係した=それによって定義された他の値も自動的に変わるということだ。
+簡単に言うとFRPとは、ある一つの値が変わると、それに関係した=それによって定義された他の値も自動的に変わるということだ。
 
-FRPの観念的な例として以下のコードを挙げる。(これはReflexのコードではない。あくまで観念的な擬似コード。)
+たとえば、次の擬似コードについて考えてみる。
+
 ```javascript
 x = 8
 y = x + 1
@@ -40,15 +42,15 @@ x += 1
 
 まず最初に`x`を`8`と定義する。`y`を`x + 1`と定義する。`x`に`1`加算されるが、ここでさきほど`y`を`x`で定義したので、`y`の値を現在の`x`の値を用いて再計算する。最終的には、`x = 9`、`y = 10`になる。
 
-FRPの重要な点は、式がそのまま恒真な命題となることだ。上記のコードにおいて、普通な解釈では`y = x + 1`は2行目までは成り立つが、3行目からは成り立たない。しかしFRP的な考え方では、`y = x + 1`はどんな場合でも成り立つ。そのように`y`が定義され、値を自動で更新するプログラムが裏で動いているからだ。
+FRPの重要な点は、式がずっと成り立つことだ。上記のコードにおいて、普通な解釈では`y = x + 1`は2行目までは成り立つが、3行目からは成り立たない。しかしFRP的な考え方では、`y = x + 1`はどんな場合でも成り立つ。そのように`y`が定義され、値を自動で更新するプログラムが裏で動いているからだ。
 
-本当は、FRPにおいて上記コード内の`x += 1`という部分は、外の世界(ユーザの入力, 乱数, 時刻etc)に関係する部分である。なぜなら、そういった不確定要素がなければ、初めから全ての変数の値が計算できてしまい、変数を更新する必要がないからである。たとえば、ボタンAを押すたび`x += 1`、1秒ごとに`x += 1`と言った具合だ。すなわち、`x`は`8 + ボタンAの押された回数`や`8 + 経過秒数`として定義される。こう考えると、FRPとはすなわち外の世界によって変化する値の定義(の集合)であることがわかる。ある意味では、外の世界が一つのプリミティブな変数であり、それを"加工"し、外の世界が関係する変数を作り上げることがFRPであるとも言える。Reflexの場合、最終的に生成するべきものは動的に変化するページである。それを、外の世界を"加工"して定義する。イメージ的にはそんな感じだ。
+本当は、FRPにおいて上記コード内の`x += 1`という部分は、ユーザの入力、乱数、時間などの「外の世界」に関係する部分である(なぜなら、そういった不確定要素がなければ、初めから全ての変数の値が計算できてしまい、変数を更新する必要がないから)。たとえば、ボタンAを押すたび`x += 1`、1秒ごとに`x += 1`と言った具合に。すなわち、`x`は`8 + ボタンAの押された回数`や`8 + 経過秒数`として定義される。こう考えると、FRPとは「外の世界」によって変化する値の定義となる。ある意味では、「外の世界」が最初からある変数であり、それを"加工"し、それが関係する変数を作り上げることがFRPだ。Reflexの場合、最終的に生成するべきものは動的に変化するページである。それを、「外の世界」を"加工"して定義する。イメージ的にはそんな感じ。
 
-たとえHaskellのような関数型言語であっても、外の世界が関係する部分は、どうしても手続き的な表現をする他ない。ユーザの入力を待つ -> `x`を更新する -> `y`を更新する、といったように。しかしFRPでは、ユーザの入力や時間経過が関係する部分でさえ、それらを"加工"して、定義的=関数的=Functionalに書ける。もちろん、内部では手続き的な表現でプログラムが動いているのだけれど、Reflexはそれを関数的に記述できるインターフェースを用意してくれている。
+たとえHaskellのような関数型言語であっても、「外の世界」が関係する部分は、どうしても手続き的な表現をするしかない。ユーザの入力を待つ -> `x`を更新する -> `y`を更新する、といったように。しかしFRPでは、ユーザの入力や時間経過が関係する部分でさえ、それらを定義的=関数的=Functionalに書ける。
 
 FRPのもっとわかりやすい例として、Excelが挙げられる。Excelでは、あるセルの計算式に関係する部分を変更すると、自動的にセルの内容が再計算され、更新される。たとえば、A11をA1からA10までの数値の和(`A11 = SUM(A0:A10)`)としてやると、A1からA10までの数値をユーザが変更するたびに、A11の内容が再計算される。
 
-## ReflexとReflex-DOMの環境構築
+## ReflexとReflex-DOMの環境構築・コンパイルのしかた
 このサイトに詳しい手順が書かれている。  
 <https://github.com/reflex-frp/reflex-platform>
 
@@ -57,15 +59,13 @@ Reflexのソースコード`your-source-file.hs`を用意した上で、以下�
 1. `git clone https://github.com/reflex-frp/reflex-platform`
 2. `cd reflex-platform`
 3. `./try-reflex` (めっちゃ時間かかる)
-4. `nix-shell`
-5. `ghcjs --make your-source-file.hs`
+4. `ghcjs --make your-source-file.hs`
 
-すると、ディレクトリ`your-source-file.jsexe`が生成され、その中にindex.htmlやJavascriptがある。
+すると、ディレクトリ`your-source-file.jsexe`が生成され、その中にHTMLやJavascriptが入っている。今回はSPAを作るので、別途サーバを立てなければいけない。
 
-ただし、今回はSPAを作るので、別途サーバを立てなければいけない。
-
-`your-source-file.jsexe`内で`npm install express`を実行したのち、`server.js`と言う名前で以下のNode.jsプログラムを作成し、`node server.js`を実行する。http://localhost:8080/ に行けば、ページが動いていることが確認できる。
-
+1. `cd your-source-file.jsexe`
+2. `npm install express`
+3. `server.js`と言う名前で以下のNode.jsプログラムを作成
 ```javascript
 const express = require('express');
 const path = require('path');
@@ -73,7 +73,7 @@ const port = process.env.PORT || 8080;
 const app = express();
 
 app.get('/:filename.js', function (request, response) {
-  response.sendFile(path.join(__dirname, request.params.filename + ".js"));
+  response.sendFile(path.join(__dirname, request.params.filename + '.js'));
 });
 
 app.get('*', function (request, response) {
@@ -81,8 +81,10 @@ app.get('*', function (request, response) {
 });
 
 app.listen(port);
-console.log("server started on port " + port);
+console.log('server started on port ' + port);
 ```
+4. `node server.js`
+5. <http://localhost:8080/> に行けば、ページが動いていることが確認できる。
 
 ## ReflexとReflex-DOMの仕組み
 
@@ -92,64 +94,65 @@ console.log("server started on port " + port);
 
 - 型の名前は必ず大文字から始まらないといけない。
 
-- 型を小文字から書き始めた場合、どんな型でも入ると言う意味になる。ただし、同じ文字には同じ型が入る。例：恒等写像`id :: a -> a`{.haskell}
+- 型を小文字から書き始めた場合、どんな型でも入ると言う意味になる。ただし、同じ文字には同じ型が入る。例: 恒等写像`id :: a -> a`{.haskell}
 
 - 関数は、1行目に`関数名 :: 引数1の型 -> ... -> 引数nの型 -> 返り値の型`、2行目に`関数名 引数1 ... 引数n = プログラム`で定義する。引数を二乗する関数の例:
   ```haskell
   func :: Int -> Int
   func n = n * n
   ```
-  「funcは`Int -> Int`{.haskell}型である」「`Int -> Int`{.haskell}型の関数funcが存在する」という意味で、`func :: Int -> Int`{.haskell}と書く場合がある。
+  「funcは`Int -> Int`{.haskell}型である」や「`Int -> Int`{.haskell}型の関数funcが存在する」という意味で、`func :: Int -> Int`{.haskell}と書く場合がある。
 
-- `Event Int`{.haskell}のような、大文字から始まる語が二語以上続く型では、内部にどんな型の値があるか指定することができる。Javaのジェネリクスみたいなやつ。
+- `Event Int`{.haskell}のような、大文字から始まる語が二語以上続く型では、内部にどんな型の値があるか指定することができる。Javaのジェネリクスみたいなやつ。たとえば、「数値もしくは文字列」を表す型は`Either Int String`{.haskell}。
 
 - 関数への入力は、`関数名 引数1 ... 引数n`で表す。
 
 - 関数名が記号の場合、入力を`引数1 * 引数2`のように書くことができる。この時、`* :: 引数1の型 -> 引数2の型 -> 出力の型`となる。
 
-- Reflexにおいて、文字列は`Text`{.haskell}型をもつ。本当は`String`{.haskell}型が標準なのだが、`Text`{.haskell}型じゃないと受け付けてくれない。
+- Reflexにおいて、文字列は`Text`{.haskell}型をもつ。本当は`String`{.haskell}型が標準なのだけど、`Text`{.haskell}型じゃないと受け付けてくれない。
 
-- 無名関数は、`(\引数1 ... 引数n -> プログラム)`で表す。
+- 無名関数は、`(\引数1 ... 引数n -> プログラム)`で表す。例: `(\x -> x * x) 3`{.haskell}の値は`9`{.haskell}になる。
 
-- 何もデータがない型(nullのようなもの)は、空タプル`()`で表す。
+- 何もデータがない型(nullのようなもの)は、空タプル`()`{.haskell}で表す。
 
 ReflexとReflex-DOMでは、4つの重要な概念が登場する。Event、Behavior、Dynamic、Widgetだ。
 
 ### Event
 
 Eventは、ある特定の時間に発火し、何らかの値を伝える。  
-たとえば、キー入力だったら、キーが押された瞬間に、キーコードを伝える。キーボード入力やマウスクリックなどは全てEventだ。  
+Eventはキーボード入力やマウスクリックなどの「外の世界」の情報を伝える。  
+たとえばキー入力だったら、キーが押された瞬間にキーコードを伝える。
 
-以下のような関数がある。
+以下の関数がある。
 
 - `domEvent Click el :: Event t ()`{.haskell} - HTML要素のクリックを伝える。クリック時に発火するが、値を持たない。
-- `domEvent Keypress el :: Event t Int`{.haskell} - HTML要素内でキーが押された時に発火する。キーコードが値となる。
+- `domEvent Keypress el :: Event t Int`{.haskell} - HTML要素内でキーが押された時に発火する。キーコードを伝える。
 
-Eventの型は`Event t a`で表される。aが内部に保持される値の型(上の例だとキーコード)。tはおまじない的なもので、プログラムする際には関係ない。
+Eventの型は`Event t a`で表される。aが内部に保持される値の型(上の例だとキーコード)。
 
-図としてイメージすると、以下のような感じになる。ある特定の時間において、Eventが発火し、その時に同時に値が伝えられる。
+図としてイメージすると、こんな感じになる。ある特定の時間において、Eventが発火し、その時に同時に値が伝えられる。
 
-![](/img/reflex-spa/event.png)  
+![](../../static/img/reflex-spa/event.png)  
 <small>(https://github.com/hansroland/reflex-dom-inbits/blob/master/tutorial.md から引用。(c) Hans Roland Senn)</small>
 
 ### Behavior
 
 Behaviorは、通常の変数のこと。Behaviorはいかなる時点でも必ず何らかの値を持つが、いつ値が変わったのかを知ることはできない。
 
-以下のような関数がある。
+以下の関数がある。
 
 - `hold :: a -> Event t a -> Widget t (Behavior t a)`{.haskell}  - Eventに初期値を与えることで、Behaviorを作る。ただし、後述のWidgetに包まれて帰ってくる。
 
-BehaviorからEventを作ることは、Behaviorの振る舞いがわからないので不可能。
+BehaviorからEventを作ることは、Behaviorの振る舞いがわからないので不可能。図としてイメージすると、こんな感じになる。
 
-![](/img/reflex-spa/behavior.png)  
+![](../../static/img/reflex-spa/behavior.png)  
 <small>(https://github.com/hansroland/reflex-dom-inbits/blob/master/tutorial.md から引用。(c) Hans Roland Senn)</small>
 
 ### Dynamic
 
 Dynamicは、EventとBehaviorの組み合わせ。つまり、変化する値と、それが変更された瞬間の両方が格納されている。
 
-以下のような関数がある。
+以下の関数がある。
 
 - `current :: Dynamic t a -> Behavior t a`{.haskell}  - DynamicからBehaviorを取り出す。
 - `updated :: Dynamic t a -> Event t a`{.haskell}  - DynamicからEventを取り出す。
@@ -157,9 +160,9 @@ Dynamicは、EventとBehaviorの組み合わせ。つまり、変化する値と
 - `count :: Event t a -> Widget t (Dynamic t Int)`{.haskell}  - Eventが発生した回数を数え、`Int`が格納されたDynamicを作成する。ただし、後述のWidgetに包まれて帰ってくる。
 - `<$> :: (a -> b) -> (Dynamic a -> Dynamic b)`{.haskell}  - 超便利関数。任意の関数を、入力Dynamic出力Dynamicの関数に変化させることができる。じつはDynamicの親分にFunctorというものがあって、そこに入っている関数。
 
-BehaviorからDynamicを作ることは、Behaviorの振る舞いがわからないので不可能。
+BehaviorからDynamicを作ることは、Behaviorの振る舞いがわからないので不可能。図としてイメージすると、こんな感じになる。EventとBehaviorの重ね合わせ。
 
-![](/img/reflex-spa/dynamic.png)  
+![](../../static/img/reflex-spa/dynamic.png)  
 <small>(https://github.com/hansroland/reflex-dom-inbits/blob/master/tutorial.md から引用。(c) Hans Roland Senn)</small>
 
 ### Widget
@@ -169,7 +172,7 @@ BehaviorからDynamicを作ることは、Behaviorの振る舞いがわからな
 - `el :: Text -> Widget t a -> Widget t a`{.haskell}  - HTMLタグ作成。Widgetを消費してWidgetを生成しているのは、タグの中の内容を指定させるため。
 - `text :: Text -> Widget t ()`{.haskell}  - 固定テキスト作成
 - `dynText :: Dynamic Text -> Widget t ()`{.haskell}  - 可変テキスト作成
-- `button :: Text -> Widget t (Event t ())`{.haskell}  - ボタン作成。クリックイベントが付いてくる。
+- `button :: Text -> Widget t (Event t ())`{.haskell}  - ボタン作成。クリックEventが付いてくる。
 
 などがある。また、DynamicやBehaviorを生成する一部の関数は、`Widget t (Dynamic t a)`{.haskell}の形で値を返す。
 
@@ -200,9 +203,7 @@ widget2 = do
   return ()
 ```
 
-`button "click me"`{.haskell} の型は`Widget t (Event t ())`{.haskell} だけど、`<-`という記号を用いると、Widgetの中の値を"取り出す"ことができる。つまり、evの型は`Event t ()`{.haskell}になる。その後これを、count関数に通してDynamic化し、dynTextに通してWidget化している。
-
-
+`button "click me"`{.haskell} の型は`Widget t (Event t ())`{.haskell} だけど、`<-`という記号を用いると、Widgetの中の値を"取り出す"ことができる。つまり、evの型は`Event t ()`{.haskell}になる。その後これを、countに通してDynamic化し、dynTextに通してWidget化している。
 
 ## Reflexソースコードの書き方
 
@@ -213,35 +214,24 @@ widget2 = do
 
 import Reflex.Dom
 
-widget2 :: Widget t ()
-widget2 = do
+main :: IO ()
+main = mainWidget $ do
   ev <- button "click me"
   dynText (count ev)
   return ()
-
-main :: IO ()
-main = mainWidget widget2
 ```
 
-1行目でOverloadedStrings言語拡張を導入して、自動的に文字列がText型に変換されるようにしている。
+1行目でOverloadedStrings言語拡張を導入して、自動的に文字列がText型に変換されるようにしている。これを入れないと、`"click me"`{.haskell}がString型として扱われてしまい、コンパイルエラーが発生する。
 
-3行目でReflexをインポートしている。
+3行目でReflex及びReflex-DOMをインポートしている。
 
-Haskellプログラムのエントリーポイントはmain関数だ。mainWidgetを使うと、`Widget t ()`{.haskell}をmain関数の型`IO ()`{.haskell}に変換してくれる。
+5~9行目で、Haskellプログラムのエントリーポイントである`main :: IO ()`{.haskell}関数を定義している。`mainWidget`を使うと、WidgetをIOに変換してくれる。`$ :: (a -> b) -> a -> b`{.haskell}は、関数を適用する関数。mainWidgetにdo以降を入力し、IOを得ている。普通に括弧を使えばいいかもしれないが、この方がちょっと綺麗。
 
 ## ルーティングの実装
 
 今回は、一つのHTMLファイルにサーバへの全通信を繋げて、HTML内のJavascriptが接続先パスをもとにサイトのルーティングをする仕組みを作る。この際、複数のページが存在し、それぞれのページから他のページへのリンクを張ることができる。
 
-パスが変わると、パスの変わり方も変わる。それがリンクの構造だ。だからこそ、ページAからページBに、ページBからページAにリンクが貼ってある時、無限にAとBの間を往復できる。
-
-Reflexには、そのような再帰的構造を上手く扱える関数が用意されている。
-
-```haskell
-mfix :: (a -> Widget t a) -> Widget t a
-```
-
-以下3つの仮定から、
+ルーティングを実装するために、まずは現在のパスによって動的に変化するWidgetを生成する。そのWidgetから、次にどのページに遷移するかを決めるEventを取り出し、パスの変化に反映させる。「パスが変わると、パスの変わり方も変わる」というわけだ。早速取りかかってみよう。
 
 - パスを格納するDynamicを`loc :: Dynamic t Text`{.haskell} として扱う。
 
@@ -255,7 +245,7 @@ mfix :: (a -> Widget t a) -> Widget t a
 getPage <$> loc :: Dynamic t (Widget t (Event t Text))
 ```
 
-なかなか複雑な型になってきた。この型は、「動的に変化する、Text型のEventを格納したWidget」と言う意味になる。しかしこのままではDynamicに包まれたWidgetができるだけで、Widgetを作れない。最終的に作るべきものはWidgetだから、何とかして中身のWidgetを外に持ってくる必要がある。そこでReflex-DOMの`dyn`関数を使う。
+この型は、「動的に変化する、Text型のEventを格納したWidget」と言う意味になる。しかし、このままではDynamicに包まれたWidgetができるだけで、Widgetを作れない。最終的に作るべきものはWidgetだから、何とかして中身のWidgetを外に持ってくる必要がある。そこでReflex-DOMの`dyn`関数を使う。これは、「Widgetが入ったDynamic」を、Dynamicが変化するごとに更新されるWidgetに変換する関数だ。
 
 ```haskell
 dyn :: Dynamic t (Widget t a) -> Widget t (Event t a)
@@ -267,36 +257,94 @@ dyn :: Dynamic t (Widget t a) -> Widget t (Event t a)
 dyn (getPage <$> loc) :: Widget t (Event t (Event t Text))
 ```
 
-が出てくる。これで、Widgetを一番外に持ってくることができたが、ここでまた問題が発生する。Eventが二重になっている。今度はこれを一重にしなければならない。
+が出てくる。これで、Widgetを一番外に持ってくることができたが、問題が発生する。Eventが二重になってしまった。今度はこれを一重にしなければならない。
 
-外側のEventと内側のEventとの違いについて考えてみる。外側のEventは、dyn関数がDynamicをWidgetに変換する時についてきたものだ。しかし、今欲しいものは、次にどのページに遷移するかのEventである。だから、外側のEventは無視して、内側のEventを採用する必要がある。
+ここで、外側のEventと内側のEventとの違いについて考えてみる。外側のEventは、dyn関数がDynamicをWidgetに変換する時についてきたもので、発火のタイミングは`updated loc`と等しい。[^3]しかし、今欲しいものは、`getPage <$> loc`の中身である。だから、外側のEventは無視して、内側のEventのみ採用する。
 
-この時、`dyn`関数が内側と外側を入れ替えるような心配はしなくて良い。なぜなら、`dyn`関数は **全ての型aに対し** `Dynamic t (Widget t a)`を`Widget t (Event t a)`に変換しているからだ。すなわち、`dyn`関数はaがどのような性質を持っているか全く知らない。付加されるEventは入力のDynamicやWidgetに関係しているかもしれないが、決してaには関係できない。だから、外側のEventは内側のEventと関係がない。このように、型から関数の振る舞いを予測できるのも、Haskellの醍醐味。
-
-内側のEventだけを採用する方法はいくつかあるが、`hold`、`never`、`switch`を組み合わせた方法を用いる。
-
-`hold`はEventに初期値を与えることでBehaviorを作る関数、`never`は絶対に発火しないイベント、`switch`は現在Behaviorに入っているEventが発火した時に発火するEventを作る関数だ。
+さて、内側のEventだけを採用する方法はいくつかあるが、今回は`hold`、`never`、`switch`を組み合わせた方法を用いる。
 
 - `hold :: a -> Event t a -> Widget t (Behavior t a)`{.haskell}
+  Eventに初期値を与えることでBehaviorを作る。
 
 - `never :: Event t a`{.haskell}
-  (絶対に発火しないので、値を必要をしない。だから中の値の型は何でもよくなる)
+  絶対に発火しないEvent。絶対に発火しないので、値を必要をしない。だから値の型は何でもよくなる。
 
 - `switch :: Behavior t (Event t a) -> Event t a`{.haskell}
+  Eventが入ったBehaviorから、内部のEventを取り出す。
 
-このようにして、最終的に以下のような形で`loc`から対応するページを描画した上で、`Dynamic t Text`を求める関数が完成した。
+最初に`dyn (getPage <$> loc)`でEventが入ったEventを作る。次に`hold`と`never`を使って、Eventが入ったBehaviorを作る。最後に`switch`を使って、Eventを作ればよい。こうして、`loc`から対応するページを描画し、ページから発生するEventを抽出できた。
 
 ```haskell
-func :: Dynamic t Text -> Widget t (Dynamic t Text)
+func :: Dynamic t Text -> Widget t (Event t Text)
 func loc = do
   eventOfEvent <- dyn (getPage <$> loc)
   behaviorOfEvent <- hold never eventOfEvent
-  holdDyn "/" (switch behaviorOfEvent)
+  return (switch behaviorOfEvent)
 ```
 
-さて、ここでここ関数の型`Dynamic t Text -> Widget t (Dynamic t Text)`に注目する。じつはこの形がすごく重要なのだ。
+次に、このEventとmdo記法を使って、locを定義する。これで、ルーティングは完成だ。
 
-`holdDyn`を用いて、EventからDynamicを作っている。さらに、先ほどまで定義が明らかにされていなかったlocに対して自分自身を指定している(再帰)。実はこれでもう、ルーティングは完成だ。
+```haskell
+{-# LANGUAGE RecursiveDo #-}
+
+site :: Widget t ()
+site = mdo
+  eventOfEvent <- dyn (getPage <$> loc)
+  behaviorOfEvent <- hold never eventOfEvent
+  loc <- holdDyn "/" (switch behaviorOfEvent)
+  return ()
+```
+
+`do`が`mdo`に変わり、`RecursiveDo`言語拡張を導入している。こうすると、まるで未来予知するかのように、`loc`が定義される前から`loc`が使える。
+
+実際には何をやっているかというと、まず`loc`の値を計算するべく、`switch behaviorOfEvent`を計算する。この後、`behaviorOfEvent`や`eventOfEvent`を計算していくことになるが、ここで重要なのは、Widgetでmdo記法を使った場合、計算に必要のない部分は無視される点だ。[^4]`switch behaviorOfEvent`は現在表示されているページの遷移Eventだから、現在の`loc`の値のみ問題になる。
+
+最初`loc`の値は`"/"`なので、`switch behaviorOfEvent`は`getPage "/"`の中身と等しい。つまり、トップページを描画することで得たEventが入る。
+
+その後ページ遷移が起こると、`loc`の値が変化する。`switch behaviorOfEvent`は現在の`loc`の値に依存しているので、`loc`を変化させるイベントは遷移先のものに差し替えられる。こうして、「パスが変わるとパスの変わり方が変わる」仕組みが実装できた。
+
+ちなみに、mdoのもつ最終的な出力に必要ない部分を計算しない(必要になった時に計算する)、という方法を「遅延評価」という。ふつうのIOやWidgetでは1行1行順番に処理していくが、mdoを使うと遅延評価され、値が必要になる時まで計算が保留になる。遅延評価のおかげで、`loc`の計算に`eventOfEvent`の外側(`updated loc`)を計算することがないから、無限ループが発生しない。
+
+## 結論
+最終的に、以下のソースコードでウェブサイトを構築することができた。
+
+```haskell
+{-# LANGUAGE RecursiveDo, OverloadedStrings #-}
+
+import Reflex.Dom
+import Reflex.Dom.Location ( getLocationPath )
+import Data.Monoid
+import Data.Text
+
+getPage "/" = do
+  ev1 <- button "Go To Page 1"
+  ev2 <- button "Go To Page 2"
+  return (("/page1" <$ ev1) <> ("/page2" <$ ev2))
+
+getPage "/page1" = do
+  ev <- button "Return To Top Page"
+  return ("/" <$ ev)
+
+getPage "/page2" = do
+  ev <- button "Return To Top Page"
+  return ("/" <$ ev)
+
+getPage _ = do
+  text "page not found"
+  return never
+
+main :: IO ()
+main = mainWidget $ mdo
+  initialPath <- getLocationPath
+  eventOfEvent <- dyn (getPage <$> loc)
+  behaviorOfEvent <- hold never eventOfEvent
+  loc <- holdDyn initialPath (switch behaviorOfEvent)
+  return ()
+```
+
+ここで、`(x <$ y)`は`y`の持つ値を全て同じ値`x`にしたEventを作成する。`<>`はEvent同士を合成する。`getLocationPath`は現在のURLを取得する。
+
+本当は、HTML5 History APIの操作など、SPAのルーティングを作る上で他にもすることがあるのだけど、ここでは割愛。完全版のコードは<https://gist.github.com/aidatorajiro/dbe164f80ec9cd81ce822ed1c1c610b0> に置いてあるので、みていってね。
 
 ## 感想
 Haskellやその周辺のフレームワークは数学的（？）思考を強いてくるから非常にめんどくさい　でもそこがいい！
@@ -309,6 +357,7 @@ https://github.com/reflex-frp/reflex/blob/develop/Quickref.md
 https://github.com/reflex-frp/reflex-dom/blob/develop/Quickref.md  
 https://github.com/reflex-frp/reflex-dom-contrib/blob/master/src/Reflex/Dom/Contrib/Router.hs
 
-[^1]: https://ghc.haskell.org/trac/ghc/wiki/Commentary/Compiler/HscPipe
-
+[^1]: http://www.scs.stanford.edu/11au-cs240h/notes/ghc.html
 [^2]: https://github.com/ghcjs/ghcjs/wiki/Architecture
+[^3]: https://github.com/reflex-frp/reflex-dom/blob/4a65735dab7cc23962621a536fef4aaf983b3881/reflex-dom-core/src/Reflex/Dom/Widget/Basic.hs#L133
+[^4]: https://elvishjerricco.github.io/2017/08/22/monadfix-is-time-travel.html
