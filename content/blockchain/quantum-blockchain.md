@@ -1,5 +1,5 @@
 ---
-title: "Quantum Blockchain using entanglement in time" 読んでみた
+title: Quantum Blockchain using entanglement in time 読んでみた
 date: 2018-06-13T16:48:00+09:00
 draft: true
 ---
