@@ -4,6 +4,8 @@ date: 2018-01-21T01:50:24+09:00
 tags: ["bittorrent", "webtorrent", "javascript"]
 ---
 
+WebTorrentというライブラリを使えば、javascriptで簡単にbittorrentクライアントを構築することができる！！！！！！！！！！
+
 {{< highlight html >}}
 <!DOCTYPE html>
 <html lang="en">
