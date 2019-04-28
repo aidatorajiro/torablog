@@ -102,3 +102,11 @@ article.post:last-of-type {
 pre {
    padding: 15px;
 }
+
+a {
+   color: rgb(58, 76, 116);
+}
+
+@media screen and (min-width:1024px) { 
+p { color:#ededed;}
+}
