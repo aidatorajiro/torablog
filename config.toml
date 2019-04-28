@@ -8,27 +8,13 @@ canonifyurls = true
 sectionPagesMenu = "main"
 hasCJKLanguage = true
 pygmentsCodeFences = true
-theme = "hugo-theme-casper"
+theme = "mytheme"
 
 [params]
   description = "技術とかいろいろ"
-  cover = "avatar.png"
+  logo = "avatar.png"
   author = "Torajiro Aida"
   authorname = "Torajiro Aida"
   authorlocation = "Japan"
   authorwebsite = "https://github.com/aidatorajiro/"
   authorbio = "Japanese high school student"
-  githubName = "aidatorajiro"
-  facebookName = "kawarusosu"
-  twitterName = "kawarusosu"
-  github = "https://github.com/aidatorajiro"
-  facebook = "https://www.facebook.com/kawarusosu"
-  twitter = "https://twitter.com/kawarusosu"
-  hideHUGOSupport = false
-  googleAnalyticsUserID = "UA-111453747-1"
-  customCSS = ["css/custom.css"]
-  paginatedsections = "blockchain haskell javascript others wine"
-  customHeaderPartial = "katex.html"
-  
-  [params.social]
-    twitter = "kawarusosu"

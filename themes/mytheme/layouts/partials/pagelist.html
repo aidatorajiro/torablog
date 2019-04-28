@@ -1,0 +1,20 @@
+<article class="post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    </header>
+    <section class="post-excerpt">
+        {{if .Params.excerpt }}
+            <p>{{ .Params.excerpt }} <a class="read-more" href="{{.RelPermalink}}">&raquo;</a></p>
+        {{else}}
+            <p>{{ .Summary }} <a class="read-more" href="{{.RelPermalink}}">&raquo;</a></p>
+        {{end}}
+    </section>
+    <footer class="post-meta">
+        Tags: {{ range $index, $tag := .Params.tags }}
+            <a href="{{$.Site.BaseURL}}/tags/{{ $tag | urlize }}/">{{ $tag }}</a>,
+        {{ end }}
+        <time class="post-date" datetime="{{ .Date.Format "2001-07-04T00:00:00Z09:00" | safeHTML }}">
+            {{ .Date.Format "July 4, 2001" }}
+        </time>
+    </footer>
+</article>

@@ -11,7 +11,7 @@ Haskellという言語で使えるWebアプリケーションフレームワー�
 
 HaskellコンパイラのひとつであるGHCは、以下の流れでプログラムを機械語に変換している。[^1]
 
-![](../../static/img/reflex-spa/pipeline.png)
+![](/img/reflex-spa/pipeline.png)
 <small>http://www.scs.stanford.edu/11au-cs240h/notes/ghc.html から引用。(c) David Mazières</small>
 
 これを見ると、処理の最後の方ではSTG形式 -> Cmm形式 -> 機械語の順で変換していることがわかるが、このSTGという中間言語になったところで、それをJavascriptに翻訳するコンパイラがGHCJSだ。[^2]
@@ -134,7 +134,7 @@ Eventの型は`Event t a`で表される。aが内部に保持される値の�
 
 図としてイメージすると、こんな感じになる。ある特定の時間において、Eventが発火し、その時に同時に値が伝えられる。
 
-![](../../static/img/reflex-spa/event.png)  
+![](/img/reflex-spa/event.png)  
 <small>(https://github.com/hansroland/reflex-dom-inbits/blob/master/tutorial.md から引用。(c) Hans Roland Senn)</small>
 
 ### Behavior
@@ -147,7 +147,7 @@ Behaviorは、通常の変数のこと。Behaviorはいかなる時点でも必�
 
 BehaviorからEventを作ることは、Behaviorの振る舞いがわからないので不可能。図としてイメージすると、こんな感じになる。
 
-![](../../static/img/reflex-spa/behavior.png)  
+![](/img/reflex-spa/behavior.png)  
 <small>(https://github.com/hansroland/reflex-dom-inbits/blob/master/tutorial.md から引用。(c) Hans Roland Senn)</small>
 
 ### Dynamic
@@ -164,7 +164,7 @@ Dynamicは、EventとBehaviorの組み合わせ。つまり、変化する値と
 
 BehaviorからDynamicを作ることは、Behaviorの振る舞いがわからないので不可能。図としてイメージすると、こんな感じになる。EventとBehaviorの重ね合わせ。
 
-![](../../static/img/reflex-spa/dynamic.png)  
+![](/img/reflex-spa/dynamic.png)  
 <small>(https://github.com/hansroland/reflex-dom-inbits/blob/master/tutorial.md から引用。(c) Hans Roland Senn)</small>
 
 ### Widget
