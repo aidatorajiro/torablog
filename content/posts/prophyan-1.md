@@ -1,6 +1,7 @@
 ---
 title: "Prophyan 開発日記 1"
 date: 2019-04-28T20:26:00+09:00
+tags: ["Prophyan"]
 ---
 
 開発するかは不明
