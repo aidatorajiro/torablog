@@ -8,7 +8,7 @@
         "@type": "Organization",
         "name": {{ .Site.Params.authorname }},
         {{ with .Site.Params.logo }}
-        "image": {
+        "logo": {
             "@type": "ImageObject",
             "url": {{ printf "%s%s" $.Site.BaseURL . }},
             "width": 250,
