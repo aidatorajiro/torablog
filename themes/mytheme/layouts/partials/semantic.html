@@ -6,8 +6,18 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": {{ .Site.Params.authorname }}{{ with .Site.Params.logo }},
-        "logo": {{ printf "%s%s" $.Site.BaseURL . }}{{end}}
+        "name": {{ .Site.Params.authorname }},
+        {{ with .Site.Params.logo }}
+        "image": {
+            "@type": "ImageObject",
+            "url": {{ printf "%s%s" $.Site.BaseURL . }},
+            "width": 250,
+            "height": 250
+        }, 
+        {{end}}
+        "url": {{ .Site.Params.authorwebsite }}{{ with .Site.Params.authorbio }},
+        "description": {{ . }}
+        {{end}}
     },
     "author": {
         "@type": "Person",
