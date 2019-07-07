@@ -76,3 +76,4 @@ ldid<http://iphonedevwiki.net/index.php/Ldid>に流すと良いぞ！
 ldid -S<<XML FILE>>.xml <<BINARY FILE>>
 ```
 
+Memgame IOS版がは開発できる！やった！
