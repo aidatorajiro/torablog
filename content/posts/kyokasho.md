@@ -1,6 +1,6 @@
 ---
 title: "教科書検定 意味不明"
-date: 2019-08-20T23:32+09:00
+date: 2019-08-20T23:32:00+09:00
 ---
 
 http://www.mext.go.jp/a_menu/shotou/kyoukasho/kentei/kekka.htm
