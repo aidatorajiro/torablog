@@ -14,7 +14,7 @@
         {{end}}
     {{ end }}
 
-    {{ $list := where .Data.Pages "Section" "in" "posts" }}
+    {{ $list := where site.RegularPages "Type" "in" "posts" }}
     {{ $paginator := .Paginate ( $list ) }}
 
     {{ range $index, $page := $paginator.Pages }}
