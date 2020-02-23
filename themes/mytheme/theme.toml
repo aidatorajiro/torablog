@@ -2,12 +2,12 @@ name = "Casper"
 license = "CC0"
 licenselink = "https://github.com/aidatorajiro/torablog/blob/master/LICENSE.md"
 description = "TORA BLOG THEME!!!"
-homepage = "http://torablog.netlify.com/"
+homepage = "https://torablog.netlify.com/"
 tags = ["blog"]
 features = [""]
 min_version=0.1.0
 
 [author]
   name = "Torajiro Aida"
-  homepage = "http://torablog.netlify.com/"
+  homepage = "https://torablog.netlify.com/"
 
