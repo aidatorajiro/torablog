@@ -5,11 +5,11 @@ date: 2020-02-23T22:40:17+09:00
 ---
 
 Chrome, Firefox などで、  
-`\$SSLKEYLOGFILE`
+環境変数`SSLKEYLOGFILE`
 を設定しつつ起動すると、  
 秘密鍵・復号暗号鍵をダンプできるぞ！
 
-`\$SSLKEYLOGFILE`にはダンプ先のファイル名を指定する。
+環境変数`SSLKEYLOGFILE`にはダンプ先のファイル名を指定する。例: `SSLKEYLOGFILE=~/keylog.txt`
 
 多分opensslの機能。
 
