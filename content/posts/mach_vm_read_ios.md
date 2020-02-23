@@ -50,7 +50,7 @@ mach_port_t        *object_name);
 
 ちなみにプロセスにルート権限を持たせたい（and mach_vm_*を使えるようにする）場合は、以下のようなxmlを作って...
 
-```
+```xml
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
