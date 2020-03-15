@@ -1,5 +1,6 @@
 ---
-draft: true
+title: "Macbook Pro 2018でArch Linuxを動かすことに成功！！！"
+date: 2020-03-16T00:58:00+09:00
 ---
 
 Macbook Pro 2018でArch Linuxを動かすことに成功！！！
@@ -9,6 +10,8 @@ Macbook Pro 2018でArch Linuxを動かすことに成功！！！
 Macbook Proの中にインストールもできるけど、今回はUSBにインストールした。
 
 ## 方法
+
+やる際は自己責任でお願いします。。。。
 
 ### 仮想マシン準備編 
 
