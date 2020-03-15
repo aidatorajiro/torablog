@@ -49,8 +49,8 @@ Macbook Proの中にインストールもできるけど、今回はUSBにイン
 1. `grub-install --target=x86_64-efi --efi-directory=efi --bootloader-id=GRUB`
 1. `/efi/GRUB/grubx64.efi` を `/efi/boot/bootx64.efi`にコピー
 1. `grub-mkconfig -o /boot/grub/grub.cfg` /efi/boot/grub.cfgと/efi/GRUB/grub.cfgにも生成した方がいいかも。
-1. **大事！！！** `pacman -S networkmanager iwd`
-1. **大事！！！** `systemctl enable NetworkManager.service`
+1. `pacman -S networkmanager iwd`
+1. `systemctl enable NetworkManager.service`
 1. `exit`
 1. `reboot`で再起動。再起動後、USBメモリからブートするはず。
 
@@ -96,6 +96,9 @@ Macbook Proの中にインストールもできるけど、今回はUSBにイン
    wifi.backend=iwd
    ```
 1. `shutdown now`
+
+### 感動の起動
+
 1. MacBook Proを終了し、Optionを押しながら起動。
 1. (多分) キーボードやTouch Barがちゃんと動いているはず。。。
 
@@ -113,9 +116,43 @@ Macbook Proの中にインストールもできるけど、今回はUSBにイン
 今回は3つのドライバ・カーネルパッチを導入した。主な機能は、
 
 - linux-mbp : SSDとの通信
-- macbook12-spi-driver : キーボード&Touch Barとの通信
+- macbook12-spi-driver : キーボード・Touch Barとの通信
 - mbp2018-bridge-drv : T2チップとの通信
+
+かな？
 
 それぞれ機能がかぶさっている感じがするので、もしかすると全部を導入しなくてもいいかも。研究よろしく。
 
-VirtualBoxでbootable USBを作るのをはやらせたい。
+VirtualBoxでbootable USBを作るのをはやらせたい。wifi関係とかUSBキーボード用意するとかめんどくさいことをしなくて済む！！！
+
+## 追記2
+
+MacbookPro本体のSSDにインストールできたので報告。やり方はこんなかんじ。
+
+1. SSDのパーティションをMacのディスクユーティリティで編集し、100GBの領域を作り、ExFATなどでフォーマット。
+1. 最初の方法で作ったUSBでArchを起動。`pacman -S arch-install-scripts`でpacstrapを入れる。
+1. `fdisk /dev/nvme0n1`で先ほど作ったパーティションを確認。OSXのパーティションを間違って選ばないように注意！（このときは`/dev/nvme0n1p3`だった。）
+1. `mkfs.ext4 /dev/nvme0n1p3`で先ほどのパーティションをext4でフォーマットする。
+1. `mount /dev/nvme0n1p3 /mnt`
+1. `mkdir /mnt/boot`
+1. `mount /dev/nvme0n1p1 /mnt/boot`
+1. `pacstrap /mnt base linux-mbp linux-firmware linux-mbp-headers`
+1. `genfstab -U /mnt >> /mnt/etc/fstab`
+1. `arch-chroot /mnt`
+1. `pacman -S networkmanager iwd`
+1. `systemctl enable NetworkManager.service`
+1. 「ドライバ祭り編」「Wi-fi編」と同様にドライバをインストールし、Wi-fiのファームウェアをコピー。
+1. `pacman -S grub efibootmgr`
+1. `grub-install --target=x86_64-efi --efi-directory=efi --bootloader-id=GRUB --no-bootsector --no-nvram`（注意！`--no-bootsector --no-nvram`をつけないとカーネルパニック？する。）
+1. `grub-mkconfig -o /boot/grub/grub.cfg`
+1. `mkinitcpio -p linux-mbp`
+1. `exit`
+1. `reboot`で再起動。
+
+あとはrefind <https://www.rodsbooks.com/refind/installing.html> を入れるなどしてgrubを起動できるようにすればOK!
+
+直接`sudo diskutil mount /dev/disk0s1` -> `sudo bless --mount /Volumes/EFI --setBoot --file /Volumes/EFI/efi/GRUB/grubx64.efi --shortform`でarchのefiをblessする方法もある。
+
+## 追記3
+
+Arch起動後にUSBで外付けドライブを接続した時に、なぜか認識されない(`/dev/sd*`がnot foundになる)場合がある。そういう時は、なぜか`lspci`コマンドを走らせると認識されるようになる！謎。起動する前から接続していた場合は大丈夫だった。USBマウスなどはそういうことをしなくても自動的につながった。
