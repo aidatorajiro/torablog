@@ -1,5 +1,6 @@
 ---
 title: "悲しい事実"
+date: 2020-03-16T01:58:00+09:00
 ---
 
 <https://ameblo.jp/freeandy/>をみておもう。
