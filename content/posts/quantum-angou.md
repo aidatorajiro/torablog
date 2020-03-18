@@ -8,7 +8,7 @@ date: 2020-03-19T02:22:58+09:00
 
 どうやらlearning with errorとかshortest-vector problemとかLattice-based cryptographyとやらが関係しているらしい。。。
 
-ということでwikipedia<https://en.wikipedia.org/wiki/Learning_with_errors>などを参考に作ってみた。
+ということでwikipedia<https://en.wikipedia.org/wiki/Learning_with_errors>や<https://doi.org/10.1145%2F1568318.1568324>などを参考に作ってみた。
 
 なんか暗号化の際に、誤差となる数を少しもぐりこませておくらしい？誤差がない場合、復号化がちゃんとできているか検証する際の式は当たり前の式になる。つまり、誤差があるため復号化がたまに失敗する(間違った値を復号してしまう)ことがあるが、そのおかげでナニカが担保される、みたいな感じ。なのではなかろうか。
 
