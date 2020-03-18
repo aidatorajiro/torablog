@@ -47,8 +47,6 @@ def add_vectors(matrix, p):
 ### consts
 def genconsts(n = 128):
     p = random.choice(list(filter(lambda x: x >= n*n, prime(2*n*n))))
-    #eps = (3.45678910111213141516)
-    #m = (1 + eps)*(n + 1)*math.log(p)
     m = 5*n
 
     alp = lambda n: 1/(math.sqrt(n)*math.log(n))
