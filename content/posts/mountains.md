@@ -33,3 +33,5 @@ There are certain things that can be done, and there are certain things that can
 It's all well and good, but it's all well and good, but it must be done
 Because there's something you can do.
 deep-fried bento
+
+Translated with www.DeepL.com/Translator (free version)
