@@ -233,9 +233,11 @@ The famous person's life has meaning because:
 
 The famous person gives meaning to the whole culture of the world. We all know the story of the famous English sailor, Peter Pan. Peter Pan also had a famous father
 
-## 注釈付きMusic Macro Language (イタリックは初期入力: 猫踏んじゃった <https://gist.github.com/Tamakichi/07359e0296df03411a9c3da5cef5e20d>)
+## 注釈付きMusic Macro Language (初期入力: 猫踏んじゃった <https://gist.github.com/Tamakichi/07359e0296df03411a9c3da5cef5e20d>)
 
-*l16d+c+r8f+rf+rd+c+r8f+rf+rd+c+l8rf+rf+rl16frfrd+c+r8frfrd+c+r8frfrd+c+l8rfrfrl16f+rf+rd+c+r8f+rf+rd+c+r8f+rf+rd+c+l8rf+rf+rl16frfrd+c+r8frfrd+c+r8frfrd+c+l8rfrfrl16f+rf+rd+c+l8rf+rf+rf+rf+rf+rf+rl16frfrd+c+l8rfrfrfrfrfrfrl16f+rf+rd+c+r8f+rf+rd+c+r8f+rf+rd+c+l8rf+rf+rl16frfrd+c+r8frfrd+c+r8frfrd+c+l8rfrfrl16f+rf+r8.f+rc+c+d8c+8.frf+*rl16f+rf+rd+c6.f+rc+d8c+8.d8c+8.d6.f+d8c+d6.frf+rl16f+rf+rd+d8.f+rc+d6.c6.f+d6.f-d6.frf+rl16f+rf+rd+d6.f+rc+d6-d6.f-d6-d6.f-rl16f+rf+rd+d6.f+rc+d6-d6.c6.f+d6-d6.c6.f+d6-d6.f-
+```
+rl16f+rf+rd+c6.f+rc+d8c+8.d8c+8.d6.f+d8c+d6.frf+rl16f+rf+rd+d8.f+rc+d6.c6.f+d6.f-d6.frf+rl16f+rf+rd+d6.f+rc+d6-d6.f-d6-d6.f-rl16f+rf+rd+d6.f+rc+d6-d6.c6.f+d6-d6.c6.f+d6-d6.f-
+```
 
 [2] For reference, see C++11 Concepts (11th ed. 2014) (already available as a C++11 Standard ISO Edition (see here for more information): http://www.open-std.org/jtc1/sc22/wg21/)
 
