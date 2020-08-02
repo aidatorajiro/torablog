@@ -215,13 +215,13 @@ tag2 .= " =~ " if tags . empty?
 
 ## 数式とプログラムの解説。後半自然すぎて怖い。。。
 
-```
+```javascript
 log(8*e*(1/(x+7)^2) + 5*x^2 + 7*x + 6 + 8y) + 1/y, // x is x (0 if e = 0, 1 if e=1) y /= x^2 - 1/x + 1/y + 2*y^2 // y is y *x + 7*x*y + 8*x*y + 2*x*y + 2 / y; // y is y *x + (x + 9)/y + (x + 10)/y + 7 *x + 2*x *y + (8 - y)*x *y + (y ^2 -x)*x *y // x is x + 8*x*(9/(x + 9)^2); // x is x (0 if e = 0, 1 if e=1) x = 1 ; return x; }
 ```
 
 In this case, the first argument x and x are integers and the first argument y are all positive integers (e.g. 3,5,7,8,9). We have to do some calculations with the following values (you can change the numbers e,x,y and y,e to whatever you want): 7 is positive, 8 is positive, we used negative values for 9 and 10. You can do:
 
-```
+```javascript
 if (x < 7) { x = -1 ; } if (x > 8) { x = 1 ; } if (x == -1) { x = -1 ; } if (x < -1) { x = 1 ; } if (x > -1) { x = -1 ; } if (x == -1) { x = 1; } if (x > 1) { x = -1 ; } if (x == -1) { x = 1; }
 ```
 
