@@ -236,7 +236,7 @@ The famous person gives meaning to the whole culture of the world. We all know t
 ## 注釈付きMusic Macro Language (初期入力: 猫踏んじゃった <https://gist.github.com/Tamakichi/07359e0296df03411a9c3da5cef5e20d>)
 
 ```
-l16d+c+r8f+rf+rd+c+r8f+rf+rd+c+l8rf+rf+rl16frfrd+c+r8frfrd+c+r8frfrd+c+l8rfrfrl16f+rf+rd+c+r8f+rf+rd+c+r8f+rf+rd+c+l8rf+rf+rl16frfrd+c+r8frfrd+c+r8frfrd+c+l8rfrfrl16f+rf+rd+c+l8rf+rf+rf+rf+rf+rf+rl16frfrd+c+l8rfrfrfrfrfrfrl16f+rf+rd+c+r8f+rf+rd+c+r8f+rf+rd+c+l8rf+rf+rl16frfrd+c+r8frfrd+c+r8frfrd+c+l8rfrfrl16f+rf+r8.f+rc+c+d8c+8.frf+rl16f+rf+rd+c6.f+rc+d8c+8.d8c+8.d6.f+d8c+d6.frf+rl16f+rf+rd+d8.f+rc+d6.c6.f+d6.f-d6.frf+rl16f+rf+rd+d6.f+rc+d6-d6.f-d6-d6.f-rl16f+rf+rd+d6.f+rc+d6-d6.c6.f+d6-d6.c6.f+d6-d6.f-
+rl16f+rf+rd+c6.f+rc+d8c+8.d8c+8.d6.f+d8c+d6.frf+rl16f+rf+rd+d8.f+rc+d6.c6.f+d6.f-d6.frf+rl16f+rf+rd+d6.f+rc+d6-d6.f-d6-d6.f-rl16f+rf+rd+d6.f+rc+d6-d6.c6.f+d6-d6.c6.f+d6-d6.f-
 ```
 
 [2] For reference, see C++11 Concepts (11th ed. 2014) (already available as a C++11 Standard ISO Edition (see here for more information): http://www.open-std.org/jtc1/sc22/wg21/)
@@ -254,3 +254,57 @@ l16d+c+r8f+rf+rd+c+r8f+rf+rd+c+l8rf+rf+rl16frfrd+c+r8frfrd+c+r8frfrd+c+l8rfrfrl1
 [8] The above is implemented in the Boost C++ Library since release 1.56, and it is enabled by default for new code even before C++11 (as was specified in Boost #3627).
 
 [9] For the sake of this example, "type" is assumed
+
+## Music Macro Language その2 (初期入力: <https://logue.dev/MabiMmlEmu/> 2声のインベンション#4, l16de ... 2efefd16d4)
+
+```
+ccef+>eaggaab+<a>fedcdefd16d4ccef+>f+da&adl32ccd20adl28c4d4d4d4c4d4c4e&adl28c4dc6ebfc4bfc8bfc6ebfc8bfc6c&adl6ebfbfff2c0d60f3eef2c0c2d0ff2c6e5ebfc&adl2c6ebfcc4bfc8bfc6ebfc90ebfc6ebfc8&adl2c0dc6ebfc4bfc8bfc90ebfc90ebfc90ebfc&adl6ec6ebfbfff2c0d60f3eef2c0c2d0ff2a9ebfc6e&adl2c6ec8ebfc90ebfc90ebfc90ebfc90ebfc90ebfc&adl2d6ebfcc50bfc8bfc90ebfc8bfc90ebfc90ebfc90ebfc6ebfc&adltbfdcbc30c0dc6e5c6e5c6e5c06c06c8e&adlt6ebfc80e5fec4e3e7e7e7e7e7e7e7e7e7e7e7e7e7e2d30ce<a+a>+eac&adl0dbfc80e5fec4e3a7e7e7e7e7e7e70e7e7e7e7e7e7e6cfffa&adlffc80e5fec4fafcdf9fa05fa05fdfdfdfdf5fdfdfdfd&adlf80e5fec4e3a7e7e7e7e7e7e7e7e7eaec5ec5ec5ec5ec5ec5ec5f8<a+b>+f9&adlf80e5fec4fafcdf9fa05fa05fa05fdfdfdfdfdfd4df8cfc9bfcd9f0d91a&adl9ea5eae5fcc
+```
+
+## Music Macro Language その3 (初期入力 : 上の初期入力のl16をL, l32をlとしたもの)
+
+```
+fe+>fddf<a+a>dc<a+agfdefda+>dc+ld+ldgdc+a+ag+dc+dc+dc+df+dfgdcffdfdffdfaeeefedfeeaeeeefdfdfffdfdfdfdfe6fdfe4bffefd1212d3ffcfcf0adbf8aefeb1e6daff9fafeba3a9fc8f7cadcae2a09daee5d1adbf9f1d0a18fa8fcc8c1acbc2b2cbaa5d3ecfaaad3af8e11ffdcf5adcf5fdfcabdfeaeaaf3dfbaaafed0bcaa9a05cd8cb3b1ed3c4f2cdb4bfb2da0e16a89a6ae11bf7c7ab7db2fd4fbe3ef2dd0b3a77dde5daea7e7d5eeb4ce8eb8b9a7dd6b5f3bfea4a9a8e0a1b6cfba1ff4f79da1c7cd88a7c8dc5c3d09a3fe1f6c8ebfcce6ed6ef6dddc8ea1ecbf8bffc3d07ca8de7ce7cb3f0cce4d9abefcfe1b8dafd7a2a6d7dbe1caa1d9a5c7ddc7abdb3dcac9c3f7a7c8eba6bc8d4b8ea4b8aab2bf7a2bb6fb89ddfeacbc2afd6dcb4fbcdc3a2ddb6bd8bac8bd99c5f8cb8d8a6a7a99b2eabdd6aa9ec5ea9a2e10f5da1a5fb8aa9a3cce2ab9d6cef8aa99cdb2b50b8a0bc2df0d8bfa9
+```
+
+## Q&Aに戦慄が走る
+
+```
+Q:What is your favorite food?
+A:apple
+Q:How are you today?
+A:nervous
+Q:What would you like to be when you grow up?
+A:Papa-Joe
+Q:What do you love most about Pittsburgh?
+A:I hate having to say this stuff but I love all the people and the culture, even though it may get a little rough in the winter
+Q:What would you be if your mother was born in Europe and your father was born in Texas?
+A:I'd be a Frenchman
+Q:Where do you hope to be on your road to recovery?
+A:Being a better man because of the experience
+Q:What were your thoughts on Johnny Manziel?
+A:He had a very good year at Texas A&M and I'm sure it was a good fit for him
+Q:What is the most surprising thing you've learned in rehab?
+A:I'm a very loyal person and I always have been and I always will be
+Q:What is your favorite color?
+A:Pink
+Q:What is your favorite thing about your mother?
+A:I get to see her as much as I want
+Q:How did you keep yourself out of trouble in the past?
+A:I was an American citizen, that's all
+Q:What is your favorite color?
+A:Pink... or asphyxiated pink
+Q:If the Pirates ever play in Pittsburgh, which team will you be rooting for and why?
+A:The Pirates
+Q:What was the first game you attended?
+A:My high school and I went to a hockey game at the county arena
+Q:Why do you think some people believe in aliens?
+A:If you've spent time in this country you realize that most things are possible... if you don't count the impossible thing
+Q:Why do you hate America?
+A:I don't hate anyone
+but I do know very few people who are willing to work hard enough to gain an education who will ever leave the country voluntarily for another country
+Q:Any last words to your fans who might read this?
+A:I want them to know they have a mother who loves them and gives of her time without asking questions
+Q:If you could have any sports car, which would you most want and why?
+A:When I grow up I want to be a racer... a driver who can go fast... and be one with the car because I am not a car... I am a human being who is built like a car...
+```
