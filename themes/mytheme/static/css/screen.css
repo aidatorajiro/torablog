@@ -104,12 +104,11 @@ article.pagelist-item:last-of-type {
 
 pre {
    padding: 15px;
-   white-space: pre;
+   white-space: pre-wrap;
    overflow: scroll;
 }
 
 code {
-   overflow-wrap: break-word;
    font-family: 'Roboto Mono', monospace;
 }
 
