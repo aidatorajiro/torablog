@@ -106,7 +106,6 @@ pre {
    padding: 15px;
    white-space: pre-wrap;
    overflow: scroll;
-   word-break: break-all;
 }
 
 code {
