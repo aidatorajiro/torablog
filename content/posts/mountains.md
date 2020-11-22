@@ -1,6 +1,6 @@
 ---
 title: "mountains"
-tags: []
+tags: ["あそび"]
 date: 2020-03-28T04:23:47+09:00
 ---
 

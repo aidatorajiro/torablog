@@ -1,12 +1,10 @@
 ---
 title: "メモ : mach_vm_*をIOSでつかう"
 date: 2019-07-07T23:04:00+09:00
-tags: []
+tags: ["mach_vm", "iOS"]
 ---
 
 <http://bbs.iosre.com/t/write-a-simple-universal-memory-editor-game-trainer-on-osx-ios-from-scratch/115>より.
-
-
 
 自分のプロセスあてだったら脱獄せんでも使えるぞ！(多分？)
 

@@ -1,6 +1,6 @@
 ---
 title: "COVID-19 Space Apps Challenge やってみた"
-tags: []
+tags: ["SpaceAppsChallenge", "COVID-19", "つき", "Moon"]
 date: 2020-06-15T20:10:53+09:00
 ---
 
