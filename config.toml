@@ -1,4 +1,4 @@
-BaseUrl = "https://torablog.netlify.com/"
+BaseUrl = "https://torablog.netlify.app/"
 LanguageCode = "ja"
 defaultContentLanguage = "ja"
 Title = "Tora Blog"
