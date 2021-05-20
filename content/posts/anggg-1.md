@@ -1,6 +1,6 @@
 ---
 title: "暗号 #1"
-tags: []
+tags: ["crypto", "cryptography", "あんごう", "暗号"]
 date: 2021-05-21T00:22:47+09:00
 ---
 
