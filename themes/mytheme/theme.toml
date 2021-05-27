@@ -5,7 +5,7 @@ description = "TORA BLOG THEME!!!"
 homepage = "https://torablog.netlify.app/"
 tags = ["blog"]
 features = [""]
-min_version=0.1.0
+min_version=0.1
 
 [author]
   name = "Torajiro Aida"
