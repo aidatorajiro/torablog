@@ -1,6 +1,6 @@
 ---
 title: "SCP & AMD"
-tags: ["謎", "ゆめにっき"]
+tags: ["謎", "ゆめにっき", "SCP", "AMD", "川崎", "Neutralized", ""]
 date: 2021-05-28T13:01:53+09:00
 ---
 
