@@ -5,6 +5,10 @@
   font-feature-settings: normal;
 }
 
+a {
+  word-break: break-all;
+}
+
 pre {
   line-height: 1.2em;
   overflow: scroll;
