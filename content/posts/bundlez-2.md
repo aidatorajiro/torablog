@@ -1,35 +1,28 @@
 ---
-title: "bundlez #2"
-tags: ["にほんご"]
-date: 2021-05-16T19:50:38+09:00
+title: "bb"
+tags: ["ああああ", "かみいうねんの"]
+date: 2021-06-11T17:00:13+09:00
 ---
 
-えええ。。。  
-東京都の病床使用率30%台　緊急事態宣言の発令要件を満たさず違法の可能性も  
-https://news.yahoo.co.jp/byline/yanaihitofumi/20210423-00234177/  
+https://news.yahoo.co.jp/articles/eb7fe046302ce91d80f8c7a6d6667f9989bb9bbf?page=3
 
-これはすごい  
-One Last Game by Goose Ladder Games, Dave Ladr  
-https://gooseladdergames.itch.io/onelastgame  
+最後の一文が重くのしかかってくる：「そのことを、覚悟しなければならない。
 
-おかしいよこの国...  
-緊急事態宣言解除後も居酒屋･カラオケ店の営業停止可能に　告示で知事の権限拡大　国会答弁と矛盾  
-https://news.yahoo.co.jp/byline/yanaihitofumi/20210425-00234471/  
+https://www.bloomberg.co.jp/news/articles/2021-06-10/QUH3N5DWX2PZ01
+東芝は「不当な影響」で議決権妨げようと画策
 
-入管も、自民党も、みんな人殺しだ！  
-入管法改正案　与野党協議決裂　自民、原案のまま今国会成立目指す  
-https://mainichi.jp/articles/20210514/k00/00m/010/318000c  
+「東芝は定時株主総会でのアクティビスト（物言う株主）への対応について、経済産業省に支援を要請。改正外為法に基づく権限発動の可能性などを背景とした不当な影響を一部株主に与えていた」
+「経産省が別の大株主でシンガポールを拠点とする３Ｄインベストメント・パートナーズに、エフィッシモ案に賛成した場合、外為法に基づく何らかの措置が取られる可能性を示唆」
+もうこれは経産省＝ヤクザだよね。
 
-「“他人が生きていてよいかを、入管は自由に決められる”というお墨付き」―入管法が変えられると、何が起きてしまうのか  
-https://d4p.world/news/10302/  
+https://www.chunichi.co.jp/article/270354
 
-Stop Israel’s war on Gaza, ethnic cleansing in Jerusalem  
-https://www.wsws.org/en/articles/2021/05/13/pers-m13.html  
+国連報告者の訪日要請放置
 
-MC Abdul - Palestine [FREESTYLE]  
-https://www.youtube.com/watch?v=GVAl_BWa2kU  
+約束破り嘘つき国家、日本
 
-こんな法律が通ろうとしている現状では、日本人は全員人殺し、それも特定の国籍・人種への迫害、虐殺の片棒を担いでいることになる。悲しすぎる。  
-「難民送還ではなく保護を」　入管法改正反対訴え　日比谷でデモ | 毎日新聞  
-在留管理を厳格化する  
-https://mainichi.jp/articles/20210516/k00/00m/040/064000c  
+https://www.nanzanlaw.com/column/1345
+
+解散が国益に反し、違憲で不当である理由と選挙
+
+今までなあなあで法律・憲法のねじ曲げ・国による約束破り・嘘つきが許されてきたツケが、今やってきている。。。
