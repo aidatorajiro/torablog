@@ -1,6 +1,6 @@
 ---
 title: "あああ"
-tags: ["bundlez", "tbundlez", "ぐぜであもとて"]
+tags: ["雑感", "いろいろつめあわせ", "bundlez", "tbundlez", "ぐぜであもとて"]
 date: 2021-07-07T00:46:16+09:00
 ---
 
