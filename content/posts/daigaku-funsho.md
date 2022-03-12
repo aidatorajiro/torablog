@@ -16,9 +16,9 @@ https://www.nytimes.com/2022/03/07/opinion/campus-speech-cancel-culture.html
 
 > This anxiety affects not just conservatives. I spoke with Abby Sacks, a progressive fourth-year student. She said she experienced a “pile-on” during a class discussion about sexism in media. She disagreed with her professor, who she said called “Captain Marvel” a feminist film. Ms. Sacks commented that she felt the film emphasized the title character’s physical strength instead of her internal conflict and emotions. She said this seemed to frustrate her professor.
 
-    Her classmates noticed. “It was just a succession of people, one after each other, each vehemently disagreeing with me,” she told me.
+> Her classmates noticed. “It was just a succession of people, one after each other, each vehemently disagreeing with me,” she told me.
 
-    Ms. Sacks felt overwhelmed. “Everyone adding on to each other kind of energized the room, like everyone wanted to be part of the group with the correct opinion,” she said. The experience, she said, “made me not want to go to class again.” While Ms. Sacks did continue to attend the class, she participated less frequently. She told me that she felt as if she had become invisible.
+> Ms. Sacks felt overwhelmed. “Everyone adding on to each other kind of energized the room, like everyone wanted to be part of the group with the correct opinion,” she said. The experience, she said, “made me not want to go to class again.” While Ms. Sacks did continue to attend the class, she participated less frequently. She told me that she felt as if she had become invisible.
 
 のくだりは、印象論的な詭弁にも見える。そもそも批判というのは否定ではないわけで、一見対立する意見でも、その二つをうまいこと融合させて、より精密で深い結論を得ようとするのが、本来の議論の有り方というものである。(無論、エフェメラルな、うつろいゆく対話空間の中でそのことを達成するのは難しく、対立する意見が並べ立てられるだけで終わる、ということはよくあるのだが。)その正当なプロセスに、あたかも悪い印象を抱かせているようにも見える。prevailingな言説のある種のキュレーションとして見るならば適当であるが、エビデンスによって実証されているかは、疑わしい。
 
