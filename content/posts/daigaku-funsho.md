@@ -14,7 +14,7 @@ https://www.nytimes.com/2022/03/07/opinion/campus-speech-cancel-culture.html
 
 とはいえ、NYTのページには"Opinion essays are, at their core, an argument defined and substantiated with evidence."と書かれており(<https://help.nytimes.com/hc/en-us/articles/115014809107-How-to-submit-a-Guest-Essay-for-Opinion>)、エビデンスによって実証されたものでないといけない、とされる。しかしこの記事の例えば
 
-    This anxiety affects not just conservatives. I spoke with Abby Sacks, a progressive fourth-year student. She said she experienced a “pile-on” during a class discussion about sexism in media. She disagreed with her professor, who she said called “Captain Marvel” a feminist film. Ms. Sacks commented that she felt the film emphasized the title character’s physical strength instead of her internal conflict and emotions. She said this seemed to frustrate her professor.
+> This anxiety affects not just conservatives. I spoke with Abby Sacks, a progressive fourth-year student. She said she experienced a “pile-on” during a class discussion about sexism in media. She disagreed with her professor, who she said called “Captain Marvel” a feminist film. Ms. Sacks commented that she felt the film emphasized the title character’s physical strength instead of her internal conflict and emotions. She said this seemed to frustrate her professor.
 
     Her classmates noticed. “It was just a succession of people, one after each other, each vehemently disagreeing with me,” she told me.
 
