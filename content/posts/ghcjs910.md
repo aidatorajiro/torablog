@@ -233,4 +233,5 @@ executable tmp
 
 Reflex-dom/GHCJS-dom 9.10 有志によるCompatibility Patch (ghcjs-domは0.9.9.2ですでにマージされ修正済みっぽいが、、reflexのほうはまだみたい。): <https://github.com/amesgen/reflex-dom> <https://github.com/ymeister/ghcjs-dom.git>
 
-
+（追記）Ormolu Live: <https://github.com/tweag/ormolu/tree/master/ormolu-live>  
+こちらもnixを使ってはいるものの、ビルド自体は`cabal build`で行われていて、パッケージマネージャとしては使えていない模様、、、
