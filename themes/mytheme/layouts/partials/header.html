@@ -78,7 +78,13 @@
 <body>
 
   <nav class="navigation">
-    <a href="/">{{ .Site.Title }}</a>/{{ .Path }}
+  {{ $path := "" }}
+  {{ with .File }}
+    {{ $path = .Path }}
+  {{ else }}
+    {{ $path = .Path }}
+  {{ end }}
+    <a href="/">{{ .Site.Title }}</a>/{{ $path }}
   </nav>
 
   <div class="site-wrapper">

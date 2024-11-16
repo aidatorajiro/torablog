@@ -5,6 +5,7 @@ Title = "Tora Blog"
 pagination.pagerSize = 10
 Copyright = "ここでの投稿はすべて<a href='https://creativecommons.org/publicdomain/zero/1.0/'>CC0</a>にします。All posts are licensed under <a href='https://creativecommons.org/publicdomain/zero/1.0/'>CC0</a>."
 canonifyurls = true
+enableGitInfo = true
 sectionPagesMenu = "main"
 hasCJKLanguage = true
 pygmentsCodeFences = true
