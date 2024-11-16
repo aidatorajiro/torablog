@@ -139,11 +139,16 @@ Reflex使いたい人は、こんな感じのやつを作ればok.
 cabal.project
 ```yaml
 packages: .
+
+with-compiler: javascript-unknown-ghcjs-ghc-9.10
+with-hc-pkg: javascript-unknown-ghcjs-ghc-pkg-9.10
+
 source-repository-package
   type: git
   location: https://github.com/amesgen/reflex-dom
   tag: e43e0525d643f656a0a5b0f10e13e2a04712cd4e
   subdir: reflex-dom-core reflex-dom
+
 ```
 
 tmp.cabal
