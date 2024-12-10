@@ -19,3 +19,6 @@ theme = "mytheme"
   authorlocation = "Japan"
   authorwebsite = "https://github.com/aidatorajiro/"
   authorbio = ""
+
+[formatter]
+lastmod = ["lastmod", ":git"]

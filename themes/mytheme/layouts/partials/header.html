@@ -37,7 +37,9 @@
     {{ if .IsPage }}
     <meta property="og:description" content="{{ .Description }}" />
   	<meta property="og:type" content="article" />
-    <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHTML }}" />
+    <meta property="article:published_time" {{ .Date.Format "2006-01-02T15:04:05Z07:00" | printf "content=%q" | safeHTMLAttr }} />
+    <meta property="article:modified_time" {{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" | printf "content=%q" | safeHTMLAttr }} />
+    <meta name="date" {{ .Date.Format "2006-01-02T15:04:05-07:00" | printf "content=%q" | safeHTMLAttr }}>
 
     {{ range .Params.tags }}
     <meta property="article:tag" content="{{ . }}" />
