@@ -27,6 +27,11 @@ babel-preset-react-app eslint-config-react-app react-app-polyfillのそれぞれ
 ```bash
 cd babel-preset-react-app
 
+# delete old packages
+cat package.json | jq 'del(.dependencies."babel-preset-react-app", .dependencies."eslint-config-react-app", .dependencies."react-app-polyfill")' > package.json.new
+mv package.json.new package.json
+
+# update all packages
 cat package.json | jq -r ".dependencies | keys | .[]" > tmp_dep
 cat package.json | jq -r ".devDependencies | keys | .[]" > tmp_dev
 cat package.json | jq -r ".peerDependencies | keys | .[]" > tmp_peer
@@ -40,7 +45,7 @@ yarn add --peer $(cat tmp_peer)
 yarn add --optional $(cat tmp_opt)
 rm tmp_*
 
-# 以降、eslint-config-react-appとreact-app-polyfillにも同様のことを行う。上の階層については、まず最初にreact-appと名前のついているパッケージをすべて削除した上で、同様のことを行う。
+# 以降、eslint-config-react-appとreact-app-polyfill、上の階層のプロジェクトにも同様のことを行う。
 ```
 
 この際、以下のようにproposalが付いたパッケージを変換するように言われる場合がある。指示に従い、プラグイン名を最新のものに変化させる。(proposalをtransformに変化させればok。decoratorsは、proposalのままでいい。)
