@@ -314,7 +314,7 @@ config/jest/babelTransform.js
 
 ### web-vitalsの型の修正
 
-web-vitalsを最新版にした場合、型や変数の名前・定義の変更があるので、以下のように変更する。
+web-vitalsを最新版にした場合、型や変数の名前・定義の変更があるので、以下のように変更する。(別にこれに関しては前のバージョンのままでも特に問題はなさそう)
 
 ```
 import { CLSMetric, FCPMetric, LCPMetric, TTFBMetric } from "web-vitals";
