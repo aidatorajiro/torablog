@@ -316,7 +316,7 @@ config/jest/babelTransform.js
 
 web-vitalsを最新版にした場合、型や変数の名前・定義の変更があるので、以下のように変更する。(別にこれに関しては前のバージョンのままでも特に問題はなさそう)
 
-```
+```javascript
 import { CLSMetric, FCPMetric, LCPMetric, TTFBMetric } from "web-vitals";
 
 const reportWebVitals = (onPerfEntry?: (metric: CLSMetric | FCPMetric | LCPMetric | TTFBMetric) => void) => {
