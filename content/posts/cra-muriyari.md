@@ -312,5 +312,29 @@ config/jest/babelTransform.js
 21:      require.resolve('../babel-preset-react-app'),
 ```
 
+### web-vitalsの型の修正
+
+web-vitalsを最新版にした場合、型や変数の名前・定義の変更があるので、以下のように変更する。
+
+```
+import { CLSMetric, FCPMetric, LCPMetric, TTFBMetric } from "web-vitals";
+
+const reportWebVitals = (onPerfEntry?: (metric: CLSMetric | FCPMetric | LCPMetric | TTFBMetric) => void) => {
+  if (onPerfEntry && onPerfEntry instanceof Function) {
+    import("web-vitals").then(({ onCLS, onFCP, onLCP, onTTFB }) => {
+      onCLS(onPerfEntry);
+      onFCP(onPerfEntry);
+      onLCP(onPerfEntry);
+      onTTFB(onPerfEntry);
+    });
+  }
+};
+
+export default reportWebVitals;
+```
+
+### 終わり
+
 以上で設定は終了となる。
 今回のように、`babel-preset-react-app`といったモジュールのインポートをjsファイルに相対パスとして書くのではなく、package.jsonに相対パスとして書く場合は、`../`や`./`に参照を修正する部分は必要ないはず。
+
