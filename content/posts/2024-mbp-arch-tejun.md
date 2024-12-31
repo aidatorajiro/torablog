@@ -51,7 +51,7 @@ mkdir /mnt/home /mnt/boot
 mount /dev/mapper/mbpvg-home /mnt/home
 mount /dev/mapper/cryptboot /mnt/boot
 mkdir /mnt/boot/efi
-mount /dev/nvme0n1p1 /mnt/boot/efi
+mount $MAINEFI /mnt/boot/efi
 ```
 
 ### connect to wifi using iwctl
@@ -62,12 +62,24 @@ station wlan0 connect [SOMESSID]
 exit
 ```
 
+### add t2-linux repo
+```bash
+vim /etc/pacman.conf
+```
+
+append these lines:
+```toml
+[arch-mact2]
+Server = https://mirror.funami.tech/arch-mact2/os/x86_64
+SigLevel = Never
+```
+
 ### pacstrap to install necessary items
 ```bash
 pacstrap /mnt base linux-t2 apple-t2-audio-config apple-bcm-firmware iwd grub efibootmgr tiny-dfr t2fanrd linux-firmware iwd networkmanager vim archlinux-keyring sudo less ripgrep lvm2 bluez blueman usbutils
 ```
 
-### add t2-linux repo
+### add t2-linux repo again
 ```bash
 vim /mnt/etc/pacman.conf
 ```
