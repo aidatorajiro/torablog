@@ -115,7 +115,7 @@ nix develop git+https://gitlab.haskell.org/ghc/ghc.nix#js-cross --extra-experime
 
 wasmのほうがghcjs よりも簡単そう。ghc-wasm-metaが用意されてるので。コンパイラじゃなくてアプリのほうをビルドできるようのnixファイルが用意されてる（ただwasmだとTHが使えないらしい？ので、、、、あとhaskellでもrustでも経験上、wasmは現段階だとなぜかロード時間がめっちゃ遅くて（でもEasyRPGとか、emscriptenのプロジェクトは結構速い）、ghcjsのほうがなんとなく速そう。）
 ```
-nix shell gitlab:ghc/ghc-wasm-meta?host=gitlab.haskell.org --extra-experimental-features nix-command --extra-experimental-features flakes
+nix shell gitlab:haskell-wasm/ghc-wasm-meta?host=gitlab.haskell.org --extra-experimental-features nix-command --extra-experimental-features flakes
 
 cabal build --with-ghc=wasm32-wasi-ghc  --with-ghc-pkg=wasm32-wasi-ghc-pkg
 ```
