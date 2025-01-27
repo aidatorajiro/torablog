@@ -35,7 +35,7 @@ apply_patch src-64
 
 Here's the scard4wine patch data, modified from the original source (<https://sourceforge.net/projects/scard4wine/>) to work with wine 6.23.
 
-[scard4wine-true-patch.tar](:/bin/memo-winscard-wine/scard4wine-true-patch.tar)
+[scard4wine-true-patch.tar](/bin/memo-winscard-wine/scard4wine-true-patch.tar)
 
 Porting to the latest wine (like version 9 or 10) gonna be kinda tough works, beacuse now `.dll` and `.so` are completely separated (dll can't use unix functions and vice versa, we have to use some unix call bridge to communicate between them). Also install `pcsclite` and run `sudo systemctl start pcscd` .
 
