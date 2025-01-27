@@ -1,6 +1,6 @@
 ---
 title: "ｇｈｃｊｓついに復活！！GHC 9.10 with JS backend でreflexも動くよ！！"
-tags: ["Haskell"]
+tags: ["techmemo", "Haskell"]
 date: 2024-11-16T16:25:55+09:00
 ---
 

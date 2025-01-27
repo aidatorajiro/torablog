@@ -1,6 +1,6 @@
 ---
 title: "tech memo: general Arch Linux installation with encryption w/signing"
-tags: []
+tags: ["techmemo"]
 date: 2025-01-01T03:10:00+09:00
 ---
 

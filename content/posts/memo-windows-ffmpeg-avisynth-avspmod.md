@@ -1,6 +1,6 @@
 ---
 title: "Tech memo: windows ffmpeg + ffms2 + avspmod + avisynthPlus build script"
-tags: ["windows", "ffmpeg", "ffms2", "avspmod", "AviSynthPlus"]
+tags: ["techmemo", "windows", "ffmpeg", "ffms2", "avspmod", "AviSynthPlus"]
 date: 2025-01-26T03:50:36+09:00
 ---
 

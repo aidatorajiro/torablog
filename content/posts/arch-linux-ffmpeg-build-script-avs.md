@@ -1,6 +1,6 @@
 ---
 title: "Tech memo: ARCH LINUX ffmpeg build script with avisynthplus plugin"
-tags: ["ArchLinux", "ffmpeg", "AviSynthPlus"]
+tags: ["techmemo", "ArchLinux", "ffmpeg", "AviSynthPlus"]
 date: 2025-01-22T23:43:55+09:00
 ---
 

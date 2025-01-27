@@ -1,6 +1,6 @@
 ---
 title: "tech memo: Arch Linux MBP2018 installation with encryption"
-tags: []
+tags: ["techmemo"]
 date: 2024-11-24T19:43:22+09:00
 ---
 
