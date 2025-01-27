@@ -149,7 +149,7 @@ Instead of using chocolatey's shared ffmpeg, you can customize ffmpeg build via 
 
 `git clone https://github.com/m-ab-s/media-autobuild_suite` and double-click `media-autobuild_suite.bat`.
 
-It is advised that the build environment should be placed right under `C:\` with shorter folder name (such as `C:\ffmp`). All the binaries will be installed on `C:\local64`. The shared FFmpeg build, which we need for avisynth, is located on `C:\ffmp\local64\bin-video\ffmpegSHARED\bin`. Just copy the binaries to the avisynth plugins directory. Please also copy `C:\ffmp\local64\bin-video\libopenh264-7.dll` to that folder.
+It is advised that the build environment should be placed right under `C:\` with shorter folder name, such as `C:\ffmp`. Then all the binaries will be installed on `C:\ffmp\local64`. The shared FFmpeg build, which we need for avisynth, is located on `C:\ffmp\local64\bin-video\ffmpegSHARED\bin`. Just copy the binaries to the avisynth plugins directory. Please also copy `C:\ffmp\local64\bin-video\libopenh264-7.dll` to that folder.
 
 Here's example configuration files. Having too much dependencies will result in build error (too long arguments), so I omitted older/unpopular codecs from the list. 
 
