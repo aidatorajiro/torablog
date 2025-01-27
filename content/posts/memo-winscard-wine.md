@@ -46,10 +46,12 @@ export CXXFLAGS="$CFLAGS"
 
 cd src-64
 ./configure --enable-win64 --prefix=$PWD/../wine
+make -j10
 cd ..
 
 cd src-32
 PKG_CONFIG_PATH=/usr/lib32 ./configure --with-wine64=../src-64 --prefix=$PWD/../wine
+make -j10
 cd ..
 
 cd src-64
