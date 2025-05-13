@@ -226,7 +226,7 @@ EnableNetworkConfiguration=true
 
 ### (if you are using NetworkManager) optionally, you can add Network Address Randomization feature
 
-Create a file `/etc/iwd/main.conf` as follows to enable address randomization feature, which (as far as i know) is not supported on usual Mac OS!
+Create a file `/etc/iwd/main.conf` as follows to enable address randomization feature, <s>which (as far as i know) is not supported on usual Mac OS!<s> (Update May 2025: i found the "Private Wi-Fi address" option in the "Network Settings..." panel.)
 
 ```toml
 [General]
