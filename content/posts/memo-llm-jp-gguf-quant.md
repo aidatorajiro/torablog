@@ -34,7 +34,7 @@ mv ../llama-models/llm-jp-3-13b-instruct3/llm-jp-3-13B-instruct3-F32.gguf ../lla
 cd ..
 ```
 
-quantizeもそのままでも普通にできるが、、、ただimatrixを使ったほうがいいらしい？？あんま変わらない気もするけどね. (<https://github.com/ggerganov/llama.cpp/pull/486> を参照のこと)
+quantizeもそのままでも普通にできるが、、、ただimatrixを使ったほうがいいらしい？？あんま変わらない気もするけどね. (<https://github.com/ggerganov/llama.cpp/pull/4861> を参照のこと)
 
 すなわち、
 <https://huggingface.co/datasets/TFMC/imatrix-dataset-for-japanese-llm/blob/main/c4_en_ja_imatrix.txt>からimatrixの学習もとデータをダウンロードするまではいいが、問題は、
