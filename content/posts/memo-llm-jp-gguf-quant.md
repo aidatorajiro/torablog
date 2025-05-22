@@ -1,5 +1,5 @@
 ---
-title: "llm-jpのggufをつくってquantizeしてllamaで動かす"
+title: "llm-jpのggufをつくってquantizeしてllama.cppで動かす"
 tags: ["gptq", "llm-jp", "quantize"]
 date: 2025-05-22T13:43:23+09:00
 ---
