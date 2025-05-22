@@ -8,8 +8,9 @@ date: 2025-04-08T10:17:54+09:00
 
 Version: Fedora 41
 
-/etc/ssh/sshd_config: 
+/etc/ssh/sshd_config:  
 以下の2行を置き換え。
+
 ```
 PasswordAuthentication yes
 #PermitEmptyPasswords no
@@ -19,7 +20,7 @@ KbdInteractiveAuthentication yes
 ```
 
 /etc/pam.d/sshd:  
-ここで他のガイドに書いてあるのと全く内容が違ったのでなにを書いていいか詰まった。幸い、forward_passとuse_first_passを使うと、最初に両方のパスを入力して片方が下流に流されるみたいなことができるらしいので、そのように改造した。また、SELinuxをオンにしていると、sshdは`.ssh`にしか見に行けないので、そこにauthenticatorのファイルを配置することに。   
+ここで他のガイドに書いてあるのと全く内容が違ったのでなにを書いていいか詰まった。幸い、`forward_pass`と`use_first_pass`を使うと、最初に両方のパスを入力して片方が下流に流されるみたいなことができるらしいので、そのように改造した。また、SELinuxをオンにしていると、sshdは`.ssh`にしか見に行けないので、そこにauthenticatorのファイルを配置することに。   
 最初の3行を以下のように置き換え   
 ```
 #%PAM-1.0
@@ -42,13 +43,16 @@ session    include      password-auth
 session    include      postlogin
 ```
 
-その後、google-authenticatorコマンドを実行して、~/.google_authenticatorファイルを生成する。
+その後、google-authenticatorコマンドを実行して、`~/.google_authenticator`ファイルを生成する。
 
-SELinuxをオンにしていると、sshdが~/.google_authenticatorにアクセスできない。
-かといって~/.google_authenticatorのファイルコンテキストをssh_home_tにしてもうまくいかない。このファイルが入っているフォルダごとコンテキストをいじらなければならないが、~/をいじるのはどう考えても無理なので、結局このファイルは~/.sshにいれることになる。
+SELinuxをオンにしていると、sshdが`~/.google_authenticator`にアクセスできない。
+かといって`~/.google_authenticator`のファイルコンテキストを`ssh_home_t`にしてもうまくいかない(なんと同一階層に一時ファイルが生成される仕様！)。このファイルが入っているフォルダごとコンテキストをいじらなければならないが、`~/`をいじるのはどう考えても無理なので、結局このファイルは`~/.ssh`にいれることになる。
 
+```
 mv ~/.google_authenticator ~/.ssh
 sudo restorecon -R ~/.ssh
+```
+
 パスワードは、ユーザーパスワード+6桁のワンタイムパスワードを連続して入力してログインできる。
 
 Sudoとかでも同じようなことをやりたいなら、同様にディレクトリを用意して、semanage fcontext で適切にコンテキストを設定する必要あり？(sudoはuid transitionはするけどcontext transitionはなさそう? sudoersと同じコンテキストにすれば大丈夫かな？)  
